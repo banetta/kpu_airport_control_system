@@ -12,7 +12,10 @@ kpu_airport_control_system
     
     1. 임현성
 
-    2. 김한상
+    2. 김한상 (Han Sang Banetta Kim aka.Banetta)
+        학번 : 2013154012
+        Java Poting 담당
+        
 
     3. 유현승
     
