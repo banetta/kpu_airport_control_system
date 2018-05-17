@@ -10,21 +10,13 @@
 class RFID
 {
 public:
-	RFID();
-	~RFID();
+	RFID() {};
+	~RFID() {};
 	void tariffpay_check();
 
 private:
-	string buyday;	//	item buy date 물건 구매 일자
+	char buyday[10];	//	item buy date 물건 구매 일자
 	int price;	//	item price 물건 가격
 };
-
-RFID::RFID()
-{
-}
-
-RFID::~RFID()
-{
-}
 
 #endif // !__RF_D_
