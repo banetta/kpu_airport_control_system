@@ -1,6 +1,6 @@
 // Airport Control System Main Header 공항 관리 시스템 메인 헤더
 // all header&code 에서 참조하는 index header
-// coding by Banetta
+// coding by Banetta Han Sang Kim
 
 #ifndef __HE_D_	// #pragma once
 
