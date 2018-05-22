@@ -1,18 +1,26 @@
-// coding by Banetta
+//	Airforce Control System Tariff Header
+//	항공관리시스템에 관세와 관련된 정보가 모여있는 Header
+//	coding by Banetta
 
-// Tariff class Header
+//	Tariff class Header
 
-#ifndef __TAR_FF_
+#ifndef __TAR_FF_	//	#pragma once
 #define __TAR_FF_
+
+#include "main_header.h"
 
 class TARIFF
 {
 public:
-	TARIFF() {};
+	TARIFF() { pay_amount = NULL; tariff_amount = NULL; };
 	~TARIFF() {};
+	void calcTariff(Entrylist*);
+	int getRFID_amount(User*);
+	void Tariff_print();
 
 private:
-
+	int pay_amount;
+	int tariff_amount;
 };
 
 

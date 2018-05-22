@@ -12,11 +12,18 @@ class RFID
 public:
 	RFID() {};
 	~RFID() {};
-	void tariffpay_check();
+	RFID(std::string, int, int*);
+	int RFID_amount(User*);
+	int RFID_buypick(int *entryday, int *leaveday);
 
 private:
-	char buyday[10];	//	item buy date 물건 구매 일자
-	int price;	//	item price 물건 가격
+	string itemname;
+	int price;
+	int buyday[2];
 };
+
+RFID::RFID(std::string, int inprice, int *buyday) {
+
+}
 
 #endif // !__RF_D_
