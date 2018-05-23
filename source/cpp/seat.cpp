@@ -1,7 +1,6 @@
 //by YHS
-#include <iostream>
-using namespace std;
-#include "Seat.h"
+#include "header\main_header.h"
+
 int Seat:: initseat() { //초기 좌석수 임의 배정
 	first = 10;
 	business = 30;

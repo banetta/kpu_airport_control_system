@@ -2,15 +2,15 @@
 // coding by LimHS
 #include "header\main_header.h"
 
-LeaveList::LeaveList(int userpassnum, string username, int userage, string userregion, int leaveyear, int leavemonth, int leaveday)
-	: User(userpassnum, username, userage, userregion)
+Leavelist::Leavelist(int userpassnum, string username, int userage, string userregion, int leaveyear, int leavemonth, int leaveday, Leaveitem userleavepack)
+	: User(userpassnum, username, userage, userregion), leavepack(userleavepack)
 {
 	leavelist_day[0] = leaveyear;	//출국년 입력
 	leavelist_day[1] = leavemonth;	//출국월 입력
 	leavelist_day[2] = leaveday;	//출국일 입력
 }
 
-void LeaveList::banitem_check(int isBanitem)
+void Leavelist::banitem_check(int isBanitem)
 {
 	switch (isBanitem)
 	{

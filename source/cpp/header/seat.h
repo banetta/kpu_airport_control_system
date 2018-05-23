@@ -2,6 +2,8 @@
 #ifndef _SEAT_
 #define _SEAT_
 
+#include "main_header.h"
+
 class Seat { // �¼� Ŭ����
 private:
 	int first;

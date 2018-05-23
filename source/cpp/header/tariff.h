@@ -15,7 +15,7 @@ public:
 	TARIFF() { pay_amount = NULL; tariff_amount = NULL; };
 	~TARIFF() {};
 	void calcTariff(Entrylist*);
-	int getRFID_amount(User*);
+	void getRFID_amount(Entrylist*);
 	void Tariff_print();
 
 private:

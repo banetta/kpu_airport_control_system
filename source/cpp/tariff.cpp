@@ -18,9 +18,7 @@ void TARIFF::calcTariff(Entrylist *user) {
 	
 }
 
-int TARIFF::getRFID_amount(User *user) {
-
-	
+void TARIFF::getRFID_amount(Entrylist *user) {
 
 	if (pay_amount >= 200000)
 	{

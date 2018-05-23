@@ -1,7 +1,5 @@
 //by YHS
-#include <iostream>
-using namespace std;
-#include "Ticket.h"
+#include "header\main_header.h"
 
 //char* Ticket::ticketseat_call(){
 

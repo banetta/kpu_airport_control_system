@@ -1,8 +1,5 @@
 //by YHS
-#include <iostream>
-#include <ctime> //시간관련 헤더파일
-using namespace std;
-#include "FlightSchedule.h"
+#include "header\main_header.h"
 
 void FlightSchedule::takeoff_check() {
 	time_t timeCur; //시간관련 구조체 생성

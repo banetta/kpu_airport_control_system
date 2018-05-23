@@ -2,7 +2,7 @@
 #ifndef _FLIGHTSCHEDULE_
 #define _FLIGHTSCHEDULE_
 
-#include "Seat.h" 
+#include "main_header.h"
 //Seat 클래스와 구성관계
 //비행일정에는 좌석정보를 가지고 있다.
 

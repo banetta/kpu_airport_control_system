@@ -12,17 +12,15 @@ class RFID
 public:
 	RFID() {};
 	~RFID() {};
-	RFID(std::string, int, int*);
-	int RFID_amount(User*);
-	int RFID_buypick(int *entryday, int *leaveday);
+	RFID(int, int*);
+	int RFID_buypick(int *entryday, int *leaveday);	//	구매한 물건을 골라주는 함수
 
 private:
-	string itemname;
 	int price;
-	int buyday[2];
+	int buyday[3];
 };
 
-RFID::RFID(std::string, int inprice, int *buyday) {
+RFID::RFID(int inprice, int *buyday) {
 
 }
 

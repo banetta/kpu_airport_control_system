@@ -1,11 +1,13 @@
 #ifndef __LE_V___
 #define __LE_V___
+#include "main_header.h"
 
-class leaveitem {
+class Leaveitem {
 private:
 	int isBanitem;
 public:
-	leaveitem(int l) :isBanitem(l)
+	Leaveitem(){}
+	Leaveitem(int l) :isBanitem(l)
 	{}
 	int isBanitem_init();
 };
