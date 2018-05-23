@@ -11,8 +11,8 @@ void FlightSchedule::takeoff_check() {
 	ptmTemp = localtime(&timeCur); // time_t* -> struct tm*
 
 	int str=-1; //입력목적지와 목적지목록의 비교 변수
-	int sum[4][2]; //총좌석수를 받는 변수
-	int m, n; //좌석정보를 저장하는데 필요한 변수
+	int sum[4][2][4]; //총좌석수를 받는 변수(목적지 종류 갯수, 비행기종류 갯수, 시간종류의 갯수에 따라 배열크기 변동)
+	int m, n, k; //좌석정보를 저장하는데 필요한 변수
 	char *time1, *time2; //time1은 예정시각, time2는 변경시각
 	char* nation[4] = { "일본","중국","미국","독일" }; //임시 목적지(국가)종류설정
 	char* pla[2] = { "아시아나","대한항공" }; //임시 비행기종류설정
@@ -27,6 +27,7 @@ void FlightSchedule::takeoff_check() {
 		int j = 0;
 		do {
 			str = strcmp(nation[j], destination);
+			m = j; //목적지의 번지수를 좌석 출력하기 위한 변수에 저장한다.
 			j++; //strcmp의 두 인자가 서로 일치하면 str==0이므로 while문을 벗어난다.
 		} while (str != 0 && j >= 0 && j < 4);
 
@@ -47,6 +48,7 @@ void FlightSchedule::takeoff_check() {
 		int j = 0;
 		do {
 			str = strcmp(pla[j], plane);
+			n = j; //목적지의 번지수를 좌석 출력하기 위한 변수에 저장한다.
 			j++; //strcmp의 두 인자가 서로 일치하면 str==0이므로 while문을 벗어난다.
 		} while (str != 0 && j >= 0 && j < 2);
 		if (str != 0) {
@@ -66,9 +68,11 @@ void FlightSchedule::takeoff_check() {
 		time1 = new char; //time1 포인터내의 공간을 만들어 런타임 오류를 방지한다.
 		time2 = new char; //time2 포인터내의 공간을 만들어 런타임 오류를 방지한다.
 
-		for (m = 0; m < 4; m++) { // 각 목적지에 따른 항공종류에 따라 초기좌석을 저장하는 반복문
-			for (n = 0; n < 2; n++) {
-				sum[m][n] = Se[m][n].initseat();
+		for (int i = 0; i < 4; i++) { // 각 목적지에 따른 항공종류에 따라 초기좌석을 저장하는 반복문
+			for (int j = 0; j < 2; j++) {
+				for (int n = 0; n < 4; n++) {
+					sum[i][j][n] = Se[i][j].initseat();
+				}
 			}
 		}
 		for (int i = 0; i < 4; i++) {
@@ -76,25 +80,25 @@ void FlightSchedule::takeoff_check() {
 				strcpy(time1, "08:55");
 				strcpy(time2, time1);
 				cout << plane << "|  " << time1 << "   |" << "  " << time2 << "   |" << "  " << "한국" << "  |"
-					<< "  " << destination << "  |" << "  " << sum[m][n] << endl;
+					<< "  " << destination << "  |" << "  " << sum[m][n][i] << endl;
 			}
 			else if (i == 1) {
 				strcpy(time1, "13:05");
 				strcpy(time2, time1);
 				cout << plane << "|  " << time1 << "   |" << "  " << time2 << "   |" << "  " << "한국" << "  |"
-					<< "  " << destination << "  |" << "  " << sum[m][n] << endl;
+					<< "  " << destination << "  |" << "  " << sum[m][n][i] << endl;
 			}
 			else if (i == 2) {
 				strcpy(time1, "18:35");
 				strcpy(time2, time1);
 				cout << plane << "|  " << time1 << "   |" << "  " << time2 << "   |" << "  " << "한국" << "  |"
-					<< "  " << destination << "  |" << "  " << sum[m][n] << endl;
+					<< "  " << destination << "  |" << "  " << sum[m][n][i] << endl;
 			}
 			else if (i == 3) {
 				strcpy(time1, "21:00");
 				strcpy(time2, time1);
 				cout << plane << "|  " << time1 << "   |" << "  " << time2 << "   |" << "  " << "한국" << "  |"
-					<< "  " << destination << "  |" << "  " << sum[m][n] << endl;
+					<< "  " << destination << "  |" << "  " << sum[m][n][i] << endl;
 			}
 			else //관제탑 추가 후 수정할 예정 
 				strcpy(time2, "10:30");
