@@ -13,7 +13,7 @@ private:
 public:
 	Leavelist() {}						//출국자의 default 생성자
 	Leavelist(int userpassnum, string username, int userage, string userregion, int leaveyear, int leavemonth, int leaveday, Leaveitem userleavepack);
-	//출국자 생성자 (여권번호, 이름, 나이, 국적, 출국일(연,월,일))
+	//출국자 생성자 (여권번호, 이름, 나이, 국적, 출국일(연,월,일), 출국자 짐)
 	void banitem_check(int isBanitem);		//출국자 짐 내의 금지물품 조사
 };
 

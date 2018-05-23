@@ -12,6 +12,5 @@ public:
 	int isBanitem_init();
 };
 
-
 #endif // !__LE_V___
 
