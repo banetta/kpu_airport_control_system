@@ -1,33 +1,35 @@
 // Airport Control System
 // coding by LimHS
 
-#ifndef __US_R__
-#define __US_R__
+#ifndef __USER__
+#define __USER__
 
 #include "main_header.h"
-
-class User
+class User																	//이용자 클래스
 {
 public:
-	User();
-	~User() {};
-	User(string user, int age, string region)
-	virtual void Banitem_check(int);
+	User() {}																//이용자 default 생성자
+	User(int userpassnum, string username, int userage, string userregion);	//이용자 생성자 (여권번호, 이름, 나이, 국적)
+	virtual void Banitem_check(int isBanitem) {};							//금지물품 체크 가상함수
+	int blacklist();														//블랙리스트 확인을 위한 여권번호 호출
 
 private:
-	int passnum;
-	string name;
-	int age;
-	string region;
-	Ticket myTicket;
+	int passnum;								//이용자 여권번호
+	string name;								//이용자 이름
+	int age;									//이용자 나이
+	string region;								//이용자 국적
+	Ticket myTicket;							//이용자 항공편
 };
 
-User::User(string user, int age, string region)
-{
-}
+#endif // !__USER__
+
+/*
+여권번호 구성 00000000
+1000000~9999999사이 난수 출력 후 *10
+뒷자리로 블랙리스트 판별
 
 
 
 
-#endif // !__US_R__
+*/
 
