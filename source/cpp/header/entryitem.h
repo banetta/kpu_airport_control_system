@@ -7,8 +7,9 @@
 class Entryitem
 {
 public:
-	Entryitem();
-	~Entryitem();
+	Entryitem() {};
+	~Entryitem() {};
+	Entryitem(int e) :isBanitem(e) {}
 	RFID RFID;
 	int isBanitem_init();
 	int RFID_pass(User*);
@@ -17,12 +18,6 @@ private:
 	int isBanitem;
 };
 
-Entryitem::Entryitem()
-{
-}
 
-Entryitem::~Entryitem()
-{
-}
 #endif // !EN__IT__
 
