@@ -9,25 +9,18 @@
 class User
 {
 public:
-	User();
+	User() {};
 	~User() {};
-	User(string user, int age, string region)
+	User(int, std::string, int, std::string);
 	virtual void Banitem_check(int);
 
+
 private:
-	int passnum;
+	int *passnum;
 	string name;
-	int age;
+	int *age;
 	string region;
-	Ticket myTicket;
+	//Ticket myTicket;
 };
-
-User::User(string user, int age, string region)
-{
-}
-
-
-
-
 #endif // !__US_R__
 

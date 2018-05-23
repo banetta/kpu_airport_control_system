@@ -10,6 +10,7 @@
 #include <iostream>
 #include <cstring>
 #include <cstdlib>
+#include <string>
 
 //	optional header
 //	분할 작업을 위해 모든 class 및 code 분할
