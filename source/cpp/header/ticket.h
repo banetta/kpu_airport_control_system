@@ -1,25 +1,13 @@
-// coding by HS
+//by YHS
+#ifndef _TICKET_
+#define _TICKET_
 
-#ifndef __TI__K_
-#define __TI__K_
-
-#include "main_header.h"
-
-class Ticket
-{
-public:
-	Ticket();
-	~Ticket();
-
+class Ticket { // 티켓 class
 private:
-
+	char* ticket_seat;
+	int Entryday[3]; // 입국일자
+	int Leaveday[3]; // 출국일자
+public:
+	//char* ticketseat_call();
 };
-
-Ticket::Ticket()
-{
-}
-
-Ticket::~Ticket()
-{
-}
-#endif // !__TI__K_
+#endif
