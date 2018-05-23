@@ -2,7 +2,7 @@
 // coding by LimHS
 #include "header\main_header.h"
 
-EntryList::EntryList(int userpassnum, string username, int userage, string userregion, int entryyear, int entrymonth, int entryday)
+Entrylist::Entrylist(int userpassnum, string username, int userage, string userregion, int entryyear, int entrymonth, int entryday)
 	: User(userpassnum, username, userage, userregion)
 {
 	entrylist_day[0] = entryyear;	//입국년 입력
@@ -10,7 +10,7 @@ EntryList::EntryList(int userpassnum, string username, int userage, string userr
 	entrylist_day[2] = entryday;	//입국일 입력
 }
 
-void EntryList::banitem_check(int isBanitem)
+void Entrylist::banitem_check(int isBanitem)
 {
 	switch (isBanitem)
 	{
@@ -29,7 +29,7 @@ void EntryList::banitem_check(int isBanitem)
 	}
 }
 
-void EntryList::overEntrylist_check()
+void Entrylist::overEntrylist_check()
 {
 	int lenghtofstay;					//체류기간을 받는 변수
 	struct tm t;						//입국 날짜를 받기 위한 라이브러리 구조체
