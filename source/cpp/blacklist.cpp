@@ -9,9 +9,9 @@ Blacklist::Blacklist(int usernum, int userreason) : blacknum(usernum)
 
 }
 
-void Blacklist::reason_print(User &User)
+void Blacklist::reason_print(User *user)
 {
-	if (User.blacklist == blacknum)
+	if (user->blacklist() == blacknum)
 	{
 		switch (reason % 10)
 		{

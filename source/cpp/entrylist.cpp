@@ -2,12 +2,26 @@
 // coding by LimHS
 #include "header\main_header.h"
 
-Entrylist::Entrylist(int userpassnum, string username, int userage, string userregion, int entryyear, int entrymonth, int entryday)
-	: User(userpassnum, username, userage, userregion)
+Entrylist::Entrylist(int userpassnum, string username, int userage, string userregion, string userticketseat, int* userentryday, int* userleaveday)
+	: User(userpassnum, username, userage, userregion, userticketseat, userentryday, userleaveday)
 {
-	entrylist_day[0] = entryyear;	//입국년 입력
-	entrylist_day[1] = entrymonth;	//입국월 입력
-	entrylist_day[2] = entryday;	//입국일 입력
+	for (int i = 0; i < 3; i++)
+	{
+		entrylist_eday[i] = userentryday[i];	//	입국일자 입력
+		entrylist_lday[i] = userleaveday[i];
+	}
+	
+	int j = 0;	//	입국자 수화물 index 번호 지정을 위한 변수
+	for (int i = (rand() % 6); i < 5; i++)	//	입국자의 수화물 갯수를 (5-i)만큼 정해줌
+	{
+		
+		entrypack[j] = new Entryitem;	//	입국자 수화물 생성 index 번호를 넣어주고 ++
+		entrypack[j]->item_init();
+		entrypack[(j + 1)] = NULL;
+		j++;
+	}
+	
+	
 }
 
 void Entrylist::banitem_check(int isBanitem)
@@ -37,9 +51,9 @@ void Entrylist::overEntrylist_check()
 	time_t     tm_nd;					//현재 날짜를 받기 위한 초단위 변수
 	double     d_diff;
 
-	t.tm_year = entrylist_day[0] - 1900;	//현재 년도를 입력, 함수 특성상 연도에 -1900을 해야함
-	t.tm_mon = entrylist_day[1] - 1;		//현재 월을 입력, 함수 특성상 월에 -1을 해야함
-	t.tm_mday = entrylist_day[2];			//현재 일을 입력
+	t.tm_year = entrylist_eday[0] - 1900;	//현재 년도를 입력, 함수 특성상 연도에 -1900을 해야함
+	t.tm_mon = entrylist_eday[1] - 1;		//현재 월을 입력, 함수 특성상 월에 -1을 해야함
+	t.tm_mday = entrylist_eday[2];			//현재 일을 입력
 	t.tm_hour = t.tm_min = t.tm_sec = t.tm_isdst = 0; //나머지를 모두 0으로 초기화
 
 	tm_st = mktime(&t);						//입국 날짜를 받은 구조체의 변수를 초단위 변수에 입력
@@ -50,4 +64,17 @@ void Entrylist::overEntrylist_check()
 	lenghtofstay = d_diff / (60 * 60 * 24); //초단위를 일단위로 변환 후 체류기간 변수에 입력
 
 	cout << "Lenght of stay : " << lenghtofstay << endl; //입국자의 현재까지 체류기간 출력
+}
+
+int Entrylist::passing_price() {
+
+	int pay = NULL;
+	for (int i = 0; entrypack[(i + 1)] == NULL; i++)
+	{
+			pay += entrypack[i]->passing_price(entrylist_eday, entrylist_lday);
+		
+	}
+	
+	return pay;
+
 }

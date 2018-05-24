@@ -9,14 +9,14 @@ class Entryitem
 public:
 	Entryitem() {};
 	~Entryitem() {};
-	Entryitem(int e, int r,int *p) :isBanitem(e),rfid(r,p) {}
-	int isBanitem_init();
+	Entryitem(int e) :isBanitem(e) { };
+	void item_init();
+	int passing_price(int*, int*);
 
 private:
 	int isBanitem;
-	RFID rfid;
+	RFID* rfid;
 };
-
 
 #endif // !EN__IT__
 

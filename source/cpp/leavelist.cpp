@@ -2,12 +2,14 @@
 // coding by LimHS
 #include "header\main_header.h"
 
-Leavelist::Leavelist(int userpassnum, string username, int userage, string userregion, int leaveyear, int leavemonth, int leaveday, Leaveitem userleavepack)
-	: User(userpassnum, username, userage, userregion), leavepack(userleavepack)
+Leavelist::Leavelist(int userpassnum, string username, int userage, string userregion, string userticketseat, int* userentryday, int* userleaveday, int leavebanitem)
+	: User(userpassnum, username, userage, userregion, userticketseat, userentryday, userleaveday), leavepack(leavebanitem)
 {
-	leavelist_day[0] = leaveyear;	//출국년 입력
-	leavelist_day[1] = leavemonth;	//출국월 입력
-	leavelist_day[2] = leaveday;	//출국일 입력
+	for (int i = 0; i < 3; i++)
+	{
+		leavelist_eday[i] = userentryday[i];
+		leavelist_lday[i] = userleaveday[i];
+	}
 }
 
 void Leavelist::banitem_check(int isBanitem)

@@ -1,15 +1,20 @@
-//by YHS
-#ifndef _TICKET_
-#define _TICKET_
+#ifndef __TIC__K
+#define __TIC__K
 
 #include "main_header.h"
 
-class Ticket { // Æ¼ï¿½ï¿½ class
-private:
-	char* ticket_seat;
-	int Entryday[3]; // ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½
-	int Leaveday[3]; // ï¿½â±¹ï¿½ï¿½ï¿½ï¿½
+class Ticket
+{
 public:
+	Ticket() {};
+	~Ticket() {};
+	Ticket(string, int*, int*);
 	//char* ticketseat_call();
+private:
+	string ticket_seat;
+	int entryday[3];	//	ÀÔ±¹ÀÏ
+	int leaveday[3];	//	Ãâ±¹ÀÏ
 };
-#endif
+
+
+#endif // !__TIC__K

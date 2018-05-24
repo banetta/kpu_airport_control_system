@@ -2,8 +2,10 @@
 // coding by LimHS
 #include "header\main_header.h"
 
-User::User(int userpassnum, string username, int userage, string userregion) : passnum(userpassnum), name(username), age(userage), region(userregion) {}
+User::User(int userpassnum, string username, int userage, string userregion, string userticketseat, int* userentryday, int* userleaveday) : passnum(userpassnum), name(username), age(userage), region(userregion), myTicket(userticketseat, userentryday, userleaveday) {}
 
-int User::blacklist() { return passnum; }
+int User::blacklist() { 
+	return passnum; 
+}
 
 
