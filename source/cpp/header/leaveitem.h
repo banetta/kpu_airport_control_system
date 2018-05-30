@@ -9,7 +9,7 @@ public:
 	Leaveitem(){}
 	Leaveitem(int l) :isBanitem(l)
 	{}
-	int isBanitem_init();
+	void isBanitem_init();
 };
 
 
