@@ -29,7 +29,7 @@ using namespace std;
 #include "entrylist.h"	//	entry list  header, entrylist.cpp
 #include "seat.h"	//	seat header, seat.cpp
 #include "flightschedule.h"	//	flightschedule header, flightschedule.cpp
-//#include "controltower.h"	//	controltower header, controltower.cpp
+#include "controltower.h"	//	controltower header, controltower.cpp
 #include "blacklist.h"	//	blacklist header, blacklist.cpp
 #include "tariff.h"	//	tariff header, tariff.cpp
 

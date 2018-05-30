@@ -4,14 +4,15 @@
 
 #include "main_header.h"
 
-class Seat { // ï¿½Â¼ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½
+class Seat { // ÁÂ¼® Å¬·¡½º
 private:
 	int first;
 	int business;
 	int economy;
 public:
+	Seat() {};
 	int initseat();
-	void Addseat();  //ï¿½Â¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
-	//void seatbooking(User * user);
+	void Addseat();  //ÁÂ¼® ¹èÁ¤ ÇÔ¼ö
+	//void seatbooking(User * user);	
 };
 #endif

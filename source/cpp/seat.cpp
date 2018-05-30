@@ -1,10 +1,12 @@
 //by YHS
+#include <iostream>
+using namespace std;
 #include "header\main_header.h"
 
 int Seat:: initseat() { //ÃÊ±â ÁÂ¼®¼ö ÀÓÀÇ ¹èÁ¤
-	first = 10;
-	business = 30;
-	economy = 60;
+	first = 1 + (rand() % 10);
+	business = 1 + (rand() % 30);
+	economy = 1 + (rand() % 60);
 	
 	return first + business + economy; // ÁÂ¼®¼ö ÃÑÇÕ
 }
