@@ -13,7 +13,7 @@ private:
 public:
 	Blacklist() {}					//블랙리스트의 default 생성자
 	Blacklist(int usernum, int userreason);					//블랙리스트 생성자 (여권번호, 사유번호)
-	void reason_print(User *user);	//블랙리스트 사유 출력 함수
+	int reason_print(int unum);	//블랙리스트 사유 출력 함수
 };
 
 #endif // !__Blacklist__
