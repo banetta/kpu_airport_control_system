@@ -8,14 +8,14 @@ class Entryitem
 {
 public:
 	Entryitem() {};
-	~Entryitem() {};
-	Entryitem(int e) :isBanitem(e) { };
+	~Entryitem() { delete rfid; };
+	//Entryitem(int e) :isBanitem(e) { };
 	void item_init();
 	int passing_price(int*, int*);
-	int sendban();
+	//int sendban();
 
 private:
-	int isBanitem;
+	//int isBanitem;
 	RFID* rfid;
 };
 

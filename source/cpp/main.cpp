@@ -143,6 +143,7 @@ void leaveprocess(Leavelist* llist[])
 void leaveprocess(Entrylist* elist[])
 {
 	Blacklist bl;
+	TARIFF ta;
 	int j;
 	for (int i = 0; i < 200; i++)
 	{
@@ -153,8 +154,7 @@ void leaveprocess(Entrylist* elist[])
 		if (j == 0)
 		{
 			elist[i]->banitem_check();
-			TARIFF ta;
-			ta.calcTariff(elist[i]);
+			ta.Tariff_print(elist[i]);
 			cout << "-Departure process completed-" << endl;
 			
 		}

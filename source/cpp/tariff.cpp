@@ -15,7 +15,6 @@ void TARIFF::calcTariff(Entrylist* elist) {
 	{
 		tariff_amount = NULL;
 	}
-	
 }
 
 void TARIFF::getRFID_amount(Entrylist *user) {

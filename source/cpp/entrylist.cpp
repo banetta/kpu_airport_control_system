@@ -5,6 +5,7 @@
 Entrylist::Entrylist(int userpassnum, string username, int userage, string userregion, string userticketseat, int* userentryday, int* userleaveday)
 	: User(userpassnum, username, userage, userregion, userticketseat, userentryday, userleaveday)
 {
+	isBanitem = rand() % 20;
 	for (int i = 0; i < 3; i++)
 	{
 		entrylist_eday[i] = userentryday[i];	//	입국일자 입력
@@ -16,11 +17,14 @@ Entrylist::Entrylist(int userpassnum, string username, int userage, string userr
 	{
 		entrypack[j] = new Entryitem;	//	입국자 수화물 생성 index 번호를 넣어주고 ++
 		entrypack[j]->item_init();
-		entrypack[(j + 1)] = NULL;
+	   entrypack[(j + 1)] = NULL;
 		j++;
 	}
 }
 
+int Entrylist::sendban() {
+	return isBanitem;
+}
 void Entrylist::banitem_check()
 {
 	int i = NULL;
@@ -28,7 +32,7 @@ void Entrylist::banitem_check()
 	{
 		if (entrypack[j] != NULL)
 		{
-			i = entrypack[j]->sendban();
+			i = sendban();
 			if (i == 0) {
 				cout << "수화물 내 금지물품 존재" << endl;
 				cout << "금지물품 폐기 완료 통과" << endl;
