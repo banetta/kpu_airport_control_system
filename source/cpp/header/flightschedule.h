@@ -13,6 +13,8 @@ private:
 	Seat Se[4][2];
 public:
 	FlightSchedule() {}; //비행일정 디폴트생성자
-	void takeoff_check(char num, ControlTower &ct); //비행일정 및 좌석 체크 함수
+	void takeoff_check(int num, ControlTower &ct); //비행일정 및 좌석 체크 함수
+	void entry_init();
+	void leave_init();
 };
 #endif
