@@ -1,16 +1,79 @@
 // Airport Control System Main Function
 // coding by Banetta Han Sang Kim
 
-// a
-
 #include "header\main_header.h"
 
-// 단일 함수 선언
-void initUser();	//	User를 입력받는 함수
+time_t inittime(int* i) {
+
+	struct tm t;
+	t.tm_year = i[0] - 1900;   //출국 년도를 입력, 함수 특성상 연도에 -1900을 해야함
+	t.tm_mon = i[1] - 1;      //출국 월을 입력, 함수 특성상 월에 -1을 해야함
+	t.tm_mday = i[2];         //출국 일을 입력
+	t.tm_hour = t.tm_min = t.tm_sec = t.tm_isdst = 0; //나머지를 모두 0으로 초기화
+	return mktime(&t);                  //출국 날짜를 받은 구조체의 변수를 초단위 변수에 입력
+}
+
+void createUser(Entrylist* elist[]) {
+
+	int fpassnum, fage, fentrtday[3], fleaveday[3];
+	string fname, fregion, fseat;
+	ifstream file;
+
+	file.open("entry.txt", ios::in);
+
+	if (file.is_open() == false)
+	{
+		cout << "file is empty." << endl;
+		cout << file.is_open() << endl;
+	}
+	else
+	{
+		for (int i = 0; !file.eof(); i++)
+		{
+			file >> fpassnum >> fname >> fage >> fregion >> fseat >> fentrtday[0] >> fentrtday[1] >> fentrtday[2] >> fleaveday[0] >> fleaveday[1] >> fleaveday[2];
+
+			elist[i] = new Entrylist(fpassnum, fname, fage, fregion, fseat, fentrtday, fleaveday);
+		}
+	}
+	if (file.is_open() == true)
+	{
+		file.close();
+	}
+}
+
+void createUser(Leavelist* llist[]) {
+
+	int fpassnum, fage, fentrtday[3], fleaveday[3];
+	string fname, fregion, fseat;
+	ifstream file;
+
+	file.open("leave.txt", ios::in);
+
+	if (file.is_open() == false)
+	{
+		cout << "file is empty." << endl;
+	}
+	else
+	{
+		for (int i = 0; !file.eof(); i++)
+		{
+			file >> fpassnum >> fname >> fage >> fregion >> fseat >> fentrtday[0] >> fentrtday[1] >> fentrtday[2] >> fleaveday[0] >> fleaveday[1] >> fleaveday[2];
+
+			llist[i] = new Leavelist(fpassnum, fname, fage, fregion, fseat, fentrtday, fleaveday);
+		}
+	}
+	if (file.is_open() == true)
+	{
+		file.close();
+	}
+}
 
 int main() {
 
 	//initUser();	//	User 입력 함수
+
+	Entrylist* elist[100];
+	Leavelist* llist[100];
 
 	while (true)	//	Menu 구성
 	{
@@ -20,7 +83,9 @@ int main() {
 		cout << "l : Leave Process" << endl;	//	출국 절차
 		cout << "t : Ticketing" << endl;	// 티켓 발권
 		cout << "o : OverEntryUser Check" << endl;	//	불법 체류자 체크
+		cout << "i : File Input" << endl;
 		cout << "q : Quit Program" << endl;	//	프로그램 종료
+
 		switch (getchar())	//	menu switch문 : getchar()를 이용, 문자를 받아서 적용
 		{
 		case 'e':	//	입국 절차 메뉴
@@ -33,6 +98,15 @@ int main() {
 
 			break;
 		case 'o':	//	불법 체류자 체크 메뉴
+
+			break;
+
+		case 'i':	//	이용자 정보 파일 입력 메뉴
+
+			cout << "이용자 정보를 불러옵니다...." << endl;
+			createUser(elist);
+			createUser(llist);
+			cout << "이용자 정보 불러오기 완료" << endl;
 
 			break;
 		case 'q':	//	프로그램 종료 메뉴
@@ -50,12 +124,3 @@ int main() {
 	}
 	
 }
-
-//void initUser() {	//	User 입력 함수 시뮬레이션을 위해 임시로 입력하지만 파일입출력으로 대체 가능
-//	
-//	User* user_list[10];	//	시뮬레이션에 필요한 User 10명 선언
-//	for (int i = 0; i < 9; i++)	//	User 정보 입력
-//	{
-//		user_list[i] = new User("Kim", "23");	//	stack절약을 위해 동적선언
-//	}
-//}

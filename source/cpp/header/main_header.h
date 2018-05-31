@@ -12,6 +12,8 @@
 #include <cstdlib>
 #include <string>
 #include <ctime>
+#include <fstream>
+
 #pragma warning(disable:4996)
 
 // namespace 선언
@@ -20,6 +22,7 @@ using namespace std;
 //	optional header
 //	분할 작업을 위해 모든 class 및 code 분할
 
+//#include "main_func.h"	//	main default func
 #include "ticket.h"	//	ticket header, ticket.cpp
 #include "user.h"	//	user header, user.cpp
 #include "leaveitem.h"	//	leave item header, leaveitem.cpp
@@ -32,6 +35,10 @@ using namespace std;
 //#include "controltower.h"	//	controltower header, controltower.cpp
 #include "blacklist.h"	//	blacklist header, blacklist.cpp
 #include "tariff.h"	//	tariff header, tariff.cpp
+
+time_t inittime(int* i);
+void createUser(Entrylist* elist);
+void createUser(Leavelist* llist);
 
 
 #endif // !__HE_D_
