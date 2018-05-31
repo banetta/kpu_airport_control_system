@@ -1,20 +1,20 @@
-Koreanair	Incheon	8	21	66	13:10
-Emirates	Incheon	10	32	138	13:10
-Japan Airlines	Incheon	2	37	34	13:40
-Japan Airlines	Incheon	7	10	147	13:40
-Asiana	Incheon	4	21	36	14:10
-Singapore Airlines	Incheon	7	9	76	14:10
-Air New Zealand	Incheon	6	18	128	14:40
-Singapore Airlines	Incheon	5	35	94	14:40
-Southwest Airlines	Incheon	5	30	131	15:10
-Singapore Airlines	Incheon	6	12	119	15:10
-Qatar Airways	Incheon	4	13	64	15:40
-Asiana	Incheon	10	10	66	15:40
-Air New Zealand	Incheon	7	17	43	16:10
-Japan Airlines	Incheon	2	40	116	16:10
-Qatar Airways	Incheon	8	38	114	16:40
-EVA Air	Incheon	10	31	17	16:40
-EVA Air	Incheon	2	14	63	17:10
-Emirates	Incheon	6	16	144	17:10
-Emirates	Incheon	8	30	70	17:40
-Asiana	Incheon	7	35	31	17:40
+QatarAirways	Incheon	8	19	57	13	:	10
+Asiana	Incheon	5	39	64	13	:	10
+EVAAir	Incheon	3	9	108	13	:	40
+Koreanair	Incheon	8	31	88	13	:	40
+JapanAirlines	Incheon	7	5	93	14	:	10
+SingaporeAirlines	Incheon	8	20	128	14	:	10
+QatarAirways	Incheon	9	40	80	14	:	40
+Asiana	Incheon	4	17	22	14	:	40
+Koreanair	Incheon	9	13	75	15	:	10
+JapanAirlines	Incheon	3	27	148	15	:	10
+SouthwestAirlines	Incheon	7	27	132	15	:	40
+EVAAir	Incheon	3	21	55	15	:	40
+SouthwestAirlines	Incheon	7	31	107	16	:	10
+AlaskaAirlines	Incheon	6	18	40	16	:	10
+EVAAir	Incheon	3	23	67	16	:	40
+JapanAirlines	Incheon	7	14	85	16	:	40
+AlaskaAirlines	Incheon	2	32	51	17	:	10
+Asiana	Incheon	9	6	53	17	:	10
+EVAAir	Incheon	6	40	149	17	:	40
+Asiana	Incheon	5	3	120	17	:	40
