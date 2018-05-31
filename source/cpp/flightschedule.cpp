@@ -1,21 +1,23 @@
 //by YHS
 #include "header\main_header.h"
 
-void FlightSchedule::takeoff_check(char num, ControlTower &ct) {
+void FlightSchedule::takeoff_check(int num, ControlTower &ct) {
 	time_t timeCur; //시간관련 구조체 생성
 	tm* ptmTemp; //시간관련 포인터 생성
 	time(&timeCur); //현재시간 함수
 	ptmTemp = localtime(&timeCur); // time_t* -> struct tm*
-	
-	while (true) {
+
+	while (num!='q') {
+		char num2 = NULL;
 		// 출국비행일정
-		while (num == 'l') {
+		while (num == 1) {
 			int str = -1; //입력목적지와 목적지목록의 비교 변수
 			int sum[4][2][4]; //총좌석수를 받는 변수(목적지 종류 갯수, 비행기종류 갯수, 시간종류의 갯수에 따라 배열크기 변동)
 			int m, n, k; //좌석정보를 저장하는데 필요한 변수
 			const char* time1[4], *time2[4]; //time1은 이륙예정시각, time2는 변경시각
 			const char* nation[4] = { "일본","중국","미국","독일" }; //임시 목적지(국가)종류설정
 			const char* pla[2] = { "아시아나","대한항공" }; //임시 비행기종류설정
+
 			while (str != 0) {
 				cout << "----------------------------------------------------------" << endl;
 				for (int i = 0; i < 4; i++) { //목적지의 종류 출력
@@ -113,7 +115,7 @@ void FlightSchedule::takeoff_check(char num, ControlTower &ct) {
 		}
 
 		//입국비행일정
-		while (num == 'e') {
+		while (num == 0) {
 			int str = -1; //입력목적지와 목적지목록의 비교 변수
 			int sum[4][2][4]; //총좌석수를 받는 변수(목적지 종류 갯수, 비행기종류 갯수, 시간종류의 갯수에 따라 배열크기 변동)
 			int m, n, k; //좌석정보를 저장하는데 필요한 변수
@@ -189,28 +191,41 @@ void FlightSchedule::takeoff_check(char num, ControlTower &ct) {
 							time2[i] = "22:05";
 					}
 					cout << plane << "|  " << time1[i] << "   |" << "  " << time2[i] << "   |" << "  " << "한국" << "  |" << "  " << sum[m][n][i] << endl;
-					num = NULL;
+					num = -1;
 				}
 			}
-
 		}
-		char num2 = NULL;
-		do {
-			cout << "----------------------------------------------------------" << endl;
-			cout << "e : 입국비행일정보기" << endl;
-			cout << "l : 출국비행일정보기" << endl;
-			cout << "q : 메뉴로 나가기 " << endl;
-			cout << "----------------------------------------------------------\n> ";
-			cin >> num2;
-			if (num2 == 'e')
-				num = 'e';
-			if (num2 == 'l')
-				num = 'l';
-			if (num2 == 'q')
-				return;
-			if (num != 'q' && num2 != 'e' && num2 != 'l') {
-				cout << "잘못된 입력입니다. " << endl;
+	
+			while (true)
+			{
+				cout << "----------------------------------------------------------" << endl;
+				cout << "e : 입국비행일정보기" << endl;
+				cout << "l : 출국비행일정보기" << endl;
+				cout << "q : 메뉴로 나가기 " << endl;
+				cout << "----------------------------------------------------------\n> ";
+				switch (getchar()) {
+				case 'e': 
+					num = 0; 
+					break;
+				case  'l': 
+					num = 1; 
+					break;
+				case 'q': 
+					num = 'q';
+					return;
+				default: 
+					cout << "잘못된 입력입니다." << endl;
+					break;
+				}
+				while (getchar() != '\n');
 			}
-		} while (num2 != 'e' && num2 != 'l');
 	}
+}
+
+void FlightSchedule::takeoff_init() {
+
+}
+
+void FlightSchedule::landing_init() {
+
 }

@@ -24,10 +24,10 @@ int main() {
 		switch (getchar())	//	menu switch문 : getchar()를 이용, 문자를 받아서 적용
 		{
 		case 'e':	//	입국 절차 메뉴
-			fs.takeoff_check('e',ct);
+			fs.takeoff_check(0,ct);
 			break;
 		case 'l':	//	출국 절차 메뉴
-			fs.takeoff_check('l',ct);
+			fs.takeoff_check(1,ct);
 			break;
 		case 't':	//	티켓 발권 메뉴
 
