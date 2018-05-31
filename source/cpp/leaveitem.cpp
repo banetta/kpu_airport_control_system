@@ -2,7 +2,7 @@
 
 void Leaveitem::isBanitem_init()
 {
-	isBanitem = rand() % 100;
+	isBanitem = rand() % 20;
 }
 
 int Leaveitem::sendban()

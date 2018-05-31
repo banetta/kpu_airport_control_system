@@ -125,21 +125,43 @@ void leaveprocess(Leavelist* llist[])
 {
 	Blacklist bl;
 	int j;
-	for (int i = 0; i < 200; i++)
+	for (int i = 0 ; i < 200; i++)
 	{
+		j = 0;
 		cout << "-------------------------------" << endl;
 		llist[i]->showyou();
 		j = bl.reason_print(llist[i]->blacklist());
-		if (j = 0)
+		if (j == 0)
 		{
 			llist[i]->banitem_check();
 			cout << "-Departure process completed-" << endl;
 		}
 		cout << "-------------------------------" << endl;
 	}
-
-
 }
+
+void leaveprocess(Entrylist* elist[])
+{
+	Blacklist bl;
+	int j;
+	for (int i = 0; i < 200; i++)
+	{
+		j = 0;
+		cout << "-------------------------------" << endl;
+		elist[i]->showyou();
+		j = bl.reason_print(elist[i]->blacklist());
+		if (j == 0)
+		{
+			elist[i]->banitem_check();
+			TARIFF ta;
+			ta.calcTariff(elist[i]);
+			cout << "-Departure process completed-" << endl;
+			
+		}
+		cout << "-------------------------------" << endl;
+	}
+}
+
 int main() {
 
 	//initUser();	//	User 입력 함수
@@ -164,7 +186,7 @@ int main() {
 		switch (getchar())	//	menu switch문 : getchar()를 이용, 문자를 받아서 적용
 		{
 		case 'e':	//	입국 절차 메뉴
-			leaveprocess(llist);
+			leaveprocess(elist);
 			break;
 		case 'l':	//	출국 절차 메뉴
 			leaveprocess(llist);

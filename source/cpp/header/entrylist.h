@@ -16,7 +16,7 @@ public:
 	Entrylist(int userpassnum, string username, int userage, string userregion, string userticketseat, int* userentryday, int* userleaveday);
 	~Entrylist() { delete entrypack; }
 	//입국자 생성자 (여권번호, 이름, 나이, 국적, 입국일(연,월,일))
-	void banitem_check(int isBanitem);		//입국자 짐 내의 금지물품 조사
+	void banitem_check();		//입국자 짐 내의 금지물품 조사
 	void overEntrylist_check();				//불법체류여부 확인
 	int passing_price();
 };

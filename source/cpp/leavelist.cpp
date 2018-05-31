@@ -16,14 +16,11 @@ Leavelist::Leavelist(int userpassnum, string username, int userage, string userr
 void Leavelist::banitem_check()
 {
 	int i = leavepack.sendban();
-	switch (i)
-	{
-	case 0:	
+	if (i == 0) {
 		cout << "수화물 내 금지물품 존재" << endl;
 		cout << "금지물품 폐기 완료 통과" << endl;
-			break;
-	default:									
+	}
+	else {
 		cout << "수화물 내 금지물품 없음 통과" << endl;
-		break;
 	}
 }

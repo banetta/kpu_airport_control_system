@@ -12,6 +12,7 @@ public:
 	Entryitem(int e) :isBanitem(e) { };
 	void item_init();
 	int passing_price(int*, int*);
+	int sendban();
 
 private:
 	int isBanitem;

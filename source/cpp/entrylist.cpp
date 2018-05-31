@@ -21,23 +21,24 @@ Entrylist::Entrylist(int userpassnum, string username, int userage, string userr
 	}
 }
 
-void Entrylist::banitem_check(int isBanitem)
+void Entrylist::banitem_check()
 {
-	switch (isBanitem)
+	int i = NULL;
+	for (int j = 0; j < 5; j++)
 	{
-	case 1:											//수화물 내에 금지물품이 없을 경우 isBanitem에 1이 들어감 
-		cout << "수화물 내 금지물품 없음 통과";
-		break;
-	case 0:											//수화물 내에 금지물품이 있을 경우 isBanitem에 0이 들어감 
-		cout << "수화물 내 금지물품 존재" << endl;
-		cout << endl;
-		cout << endl;
-		cout << "금지물품 폐기 완료 통과" << endl;
-		break;
-	default:										//혹시 오류로 인해 다른 값이 들어갔을 경우
-		cout << "수화물 검사 오류" << endl;
-		break;
+		if (entrypack[j] != NULL)
+		{
+			i = entrypack[j]->sendban();
+			if (i == 0) {
+				cout << "수화물 내 금지물품 존재" << endl;
+				cout << "금지물품 폐기 완료 통과" << endl;
+			}
+			else {
+				cout << "수화물 내 금지물품 없음 통과" << endl;
+			}
+		}
 	}
+	
 }
 
 void Entrylist::overEntrylist_check()

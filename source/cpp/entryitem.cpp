@@ -19,3 +19,9 @@ int Entryitem::passing_price(int* entryday, int* leaveday) {
 
 	return rfid->RFID_buypick(entryday, leaveday);
 }
+
+int Entryitem::sendban()
+{
+	return isBanitem;
+
+}
