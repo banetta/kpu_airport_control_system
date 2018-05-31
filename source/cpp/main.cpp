@@ -13,15 +13,13 @@ time_t inittime(int* i) {
 	return mktime(&t);                  //출국 날짜를 받은 구조체의 변수를 초단위 변수에 입력
 }
 
-void createUser(Entrylist* elist) {
+void createUser(Entrylist* elist[]) {
 
-	int fpassnum, fage, fentrtday[3], fleaveday[3];;
+	int fpassnum, fage, fentrtday[3], fleaveday[3];
 	string fname, fregion, fseat;
 	ifstream file;
 
-	file.open("entry.txt");
-
-	//file.open("entry.txt", ios::in);
+	file.open("entry.txt", ios::in);
 
 	if (file.is_open() == false)
 	{
@@ -34,7 +32,7 @@ void createUser(Entrylist* elist) {
 		{
 			file >> fpassnum >> fname >> fage >> fregion >> fseat >> fentrtday[0] >> fentrtday[1] >> fentrtday[2] >> fleaveday[0] >> fleaveday[1] >> fleaveday[2];
 
-			elist[i] = Entrylist(fpassnum, fname, fage, fregion, fseat, fentrtday, fleaveday);
+			elist[i] = new Entrylist(fpassnum, fname, fage, fregion, fseat, fentrtday, fleaveday);
 		}
 	}
 	if (file.is_open() == true)
@@ -43,10 +41,9 @@ void createUser(Entrylist* elist) {
 	}
 }
 
+void createUser(Leavelist* llist[]) {
 
-void createUser(Leavelist* llist) {
-
-	int fpassnum, fage, fentrtday[3], fleaveday[3];;
+	int fpassnum, fage, fentrtday[3], fleaveday[3];
 	string fname, fregion, fseat;
 	ifstream file;
 
@@ -62,7 +59,7 @@ void createUser(Leavelist* llist) {
 		{
 			file >> fpassnum >> fname >> fage >> fregion >> fseat >> fentrtday[0] >> fentrtday[1] >> fentrtday[2] >> fleaveday[0] >> fleaveday[1] >> fleaveday[2];
 
-			llist[i] = Leavelist(fpassnum, fname, fage, fregion, fseat, fentrtday, fleaveday);
+			llist[i] = new Leavelist(fpassnum, fname, fage, fregion, fseat, fentrtday, fleaveday);
 		}
 	}
 	if (file.is_open() == true)
@@ -75,8 +72,8 @@ int main() {
 
 	//initUser();	//	User 입력 함수
 
-	Entrylist* elist = new Entrylist;
-	Leavelist* llist = new Leavelist;
+	Entrylist* elist[100];
+	Leavelist* llist[100];
 
 	while (true)	//	Menu 구성
 	{
@@ -107,10 +104,8 @@ int main() {
 		case 'i':	//	이용자 정보 파일 입력 메뉴
 
 			cout << "이용자 정보를 불러옵니다...." << endl;
-
 			createUser(elist);
 			createUser(llist);
-
 			cout << "이용자 정보 불러오기 완료" << endl;
 
 			break;
@@ -129,12 +124,3 @@ int main() {
 	}
 	
 }
-
-//void initUser() {	//	User 입력 함수 시뮬레이션을 위해 임시로 입력하지만 파일입출력으로 대체 가능
-//	
-//	User* user_list[10];	//	시뮬레이션에 필요한 User 10명 선언
-//	for (int i = 0; i < 9; i++)	//	User 정보 입력
-//	{
-//		user_list[i] = new User("Kim", "23");	//	stack절약을 위해 동적선언
-//	}
-//}

@@ -19,7 +19,6 @@ public:
 	void banitem_check(int isBanitem);		//입국자 짐 내의 금지물품 조사
 	void overEntrylist_check();				//불법체류여부 확인
 	int passing_price();
-
 };
 
 #endif // !__EntryList__
