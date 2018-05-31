@@ -68,13 +68,67 @@ void createUser(Leavelist* llist[]) {
 	}
 }
 
+void createFlightSchedule(FlightSchedule* fschedule[]) {
+
+	string qairline;
+	string qdestination;
+	int qseat[3];
+	int qhour;
+	string qshit;
+	int qmin;
+	ifstream file;
+	int i = 0;
+	file.open("Leave_Airplane.txt", ios::in);
+
+	if (file.is_open() == false)
+	{
+		cout << "file is empty." << endl;
+		cout << file.is_open() << endl;
+	}
+	else
+	{
+		for (i = 0; !file.eof(); i++)
+		{
+			file >> qairline >> qdestination >> qseat[0] >> qseat[1] >> qseat[2] >> qhour >> qshit >> qmin;
+
+			fschedule[i] = new FlightSchedule(qairline, qdestination, qseat, qhour, qshit, qmin);
+		}
+	}
+	if (file.is_open() == true)
+	{
+		file.close();
+	}
+
+	file.open("Entry_Airplane.txt", ios::in);
+
+	if (file.is_open() == false)
+	{
+		cout << "file is empty." << endl;
+		cout << file.is_open() << endl;
+	}
+	else
+	{
+		for (i; !file.eof(); i++)
+		{
+			file >> qairline >> qdestination >> qseat[0] >> qseat[1] >> qseat[2] >> qhour >> qshit >> qmin;
+
+			fschedule[i] = new FlightSchedule(qairline, qdestination, qseat, qhour, qshit, qmin);
+		}
+	}
+	if (file.is_open() == true)
+	{
+		file.close();
+	}
+}
+
 int main() {
 
 	//initUser();	//	User 입력 함수
-	FlightSchedule fs;
+	FlightSchedule* fs[100];
 	ControlTower ct;
 	Entrylist* elist[100];
 	Leavelist* llist[100];
+
 
 	while (true)	//	Menu 구성
 	{
@@ -82,7 +136,7 @@ int main() {
 		cout << "=== Menu ===" << endl;
 		cout << "e : Entry Process" << endl;	//	입국 절차
 		cout << "l : Leave Process" << endl;	//	출국 절차
-		cout << "t : Ticketing" << endl;	// 티켓 발권
+		cout << "t : Today Airplain list" << endl;	// 금일 입출항 목록
 		cout << "o : OverEntryUser Check" << endl;	//	불법 체류자 체크
 		cout << "i : File Input" << endl;
 		cout << "q : Quit Program" << endl;	//	프로그램 종료
@@ -95,7 +149,7 @@ int main() {
 		case 'l':	//	출국 절차 메뉴
 			fs.takeoff_check(1, ct);
 			break;
-		case 't':	//	티켓 발권 메뉴
+		case 't':	//	금일 입출항 목록
 
 			break;
 		case 'o':	//	불법 체류자 체크 메뉴
@@ -103,12 +157,13 @@ int main() {
 			break;
 
 		case 'i':	//	이용자 정보 파일 입력 메뉴
-
+			cout << "금일 항공기 입출항 정보를 불러옵니다...." << endl;
+			createFlightSchedule(fs);
+			cout << "금일 항공기 입출항 정보 불러오기 완료" << endl;
 			cout << "이용자 정보를 불러옵니다...." << endl;
 			createUser(elist);
 			createUser(llist);
 			cout << "이용자 정보 불러오기 완료" << endl;
-
 			break;
 		case 'q':	//	프로그램 종료 메뉴
 			cout << endl;

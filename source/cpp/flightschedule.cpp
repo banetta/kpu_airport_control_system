@@ -1,6 +1,15 @@
 //by YHS
 #include "header\main_header.h"
 
+FlightSchedule::FlightSchedule(string fairline, string fdestination, int* fseat, int fhour, string fshit, int fmin)
+	: airline(fairline), destination(fdestination), hour(fhour), shit(fshit), min(fmin)
+{
+	for (int i = 0; i < 3; i++)
+	{
+		seat[i] = fseat[i];
+	}
+}
+
 void FlightSchedule::takeoff_check(int num, ControlTower &ct) {
 	time_t timeCur; //시간관련 구조체 생성
 	tm* ptmTemp; //시간관련 포인터 생성
