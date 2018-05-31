@@ -36,9 +36,11 @@ void Entrylist::banitem_check()
 			if (i == 0) {
 				cout << "수화물 내 금지물품 존재" << endl;
 				cout << "금지물품 폐기 완료 통과" << endl;
+				break;
 			}
-			else {
+			else  {
 				cout << "수화물 내 금지물품 없음 통과" << endl;
+				break;
 			}
 		}
 	}

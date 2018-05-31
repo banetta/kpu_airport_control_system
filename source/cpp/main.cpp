@@ -68,58 +68,58 @@ void createUser(Leavelist* llist[]) {
 	}
 }
 
-//void createFlightSchedule(FlightSchedule* fschedule[]) {
-//
-//	string qairline;
-//	string qdestination;
-//	int qseat[3];
-//	int qhour;
-//	string qshit;
-//	int qmin;
-//	ifstream file;
-//	int i = 0;
-//	file.open("Leave_Airplane.txt", ios::in);
-//
-//	if (file.is_open() == false)
-//	{
-//		cout << "file is empty." << endl;
-//		cout << file.is_open() << endl;
-//	}
-//	else
-//	{
-//		for (i = 0; !file.eof(); i++)
-//		{
-//			file >> qairline >> qdestination >> qseat[0] >> qseat[1] >> qseat[2] >> qhour >> qshit >> qmin;
-//
-//			fschedule[i] = new FlightSchedule(qairline, qdestination, qseat, qhour, qshit, qmin);
-//		}
-//	}
-//	if (file.is_open() == true)
-//	{
-//		file.close();
-//	}
-//
-//	file.open("Entry_Airplane.txt", ios::in);
-//
-//	if (file.is_open() == false)
-//	{
-//		cout << "file is empty." << endl;
-//		cout << file.is_open() << endl;
-//	}
-//	else
-//	{
-//		for (i; !file.eof(); i++)
-//		{
-//			file >> qairline >> qdestination >> qseat[0] >> qseat[1] >> qseat[2] >> qhour >> qshit >> qmin;
-//
-//			fschedule[i] = new FlightSchedule(qairline, qdestination, qseat, qhour, qshit, qmin);
-//		}
-//	}
-//	if (file.is_open() == true)
-//	{
-//		file.close();
-//	}
-//}
+void createFlightSchedule(FlightSchedule* fschedule[]) {
+
+	string qairline;
+	string qdestination;
+	int qseat[3];
+	int qhour;
+	string qshit;
+	int qmin;
+	ifstream file;
+	int i = 0;
+	file.open("Leave_Airplane.txt", ios::in);
+
+	if (file.is_open() == false)
+	{
+		cout << "file is empty." << endl;
+		cout << file.is_open() << endl;
+	}
+	else
+	{
+		for (i = 0; !file.eof(); i++)
+		{
+			file >> qairline >> qdestination >> qseat[0] >> qseat[1] >> qseat[2] >> qhour >> qshit >> qmin;
+
+			fschedule[i] = new FlightSchedule(qairline, qdestination, qseat, qhour, qshit, qmin);
+		}
+	}
+	if (file.is_open() == true)
+	{
+		file.close();
+	}
+
+	file.open("Entry_Airplane.txt", ios::in);
+
+	if (file.is_open() == false)
+	{
+		cout << "file is empty." << endl;
+		cout << file.is_open() << endl;
+	}
+	else
+	{
+		for (i; !file.eof(); i++)
+		{
+			file >> qairline >> qdestination >> qseat[0] >> qseat[1] >> qseat[2] >> qhour >> qshit >> qmin;
+
+			fschedule[i] = new FlightSchedule(qairline, qdestination, qseat, qhour, qshit, qmin);
+		}
+	}
+	if (file.is_open() == true)
+	{
+		file.close();
+	}
+}
 
 void leaveprocess(Leavelist* llist[])
 {
@@ -162,11 +162,34 @@ void leaveprocess(Entrylist* elist[])
 	}
 }
 
+void Airplainlist(FlightSchedule* fschedule[])
+{
+	int i = 0;
+	cout << "Leave Airline" << endl;
+	cout <<setw(20)<< "Airline\t" << setw(10) << "Destination\t" << setw(10) << "First class\t" << setw(10) << "Bussiness\t" << setw(10) << "Economy\t" << setw(10) << " Time" << endl;
+	for (i; i < 80; i++)
+	{
+		fschedule[i]->showthat();
+	}
+	cout << "Entry Airline" << endl;
+	cout << setw(20) << "Airline\t" << setw(10) << "Destination\t" << setw(10) << "First class\t" << setw(10) << "Bussiness\t" << setw(10) << "Economy\t" << setw(10) << "Time" << endl;
+	for (i; i < 100; i++)
+	{
+		fschedule[i]->showthat();
+	}
+}
+void Airlinemanagement(FlightSchedule* fschedule[], ControlTower &ct)
+{
+	for (int i = 0; i < 100; i++)
+	{
+		fschedule[i]->takeoff_check(ct);
+	}
+}
+
 int main() {
 
-	//initUser();	//	User 입력 함수
-	//FlightSchedule* fs[100];
-	//ControlTower ct;
+	FlightSchedule* fs[100];
+	ControlTower ct;
 	Entrylist* elist[200];
 	Leavelist* llist[200];
 	Entrylist* banlist[20];
@@ -192,14 +215,15 @@ int main() {
 			leaveprocess(llist);
 			break;
 		case 't':	//	금일 입출항 목록
-
+			Airplainlist(fs);
 			break;
 		case 'o':	//	불법 체류자 체크 메뉴
+			Airlinemanagement(fs, ct);
 			break;
 
 		case 'i':	//	이용자 정보 파일 입력 메뉴
 			cout << "금일 항공기 입출항 정보를 불러옵니다...." << endl;
-			//createFlightSchedule(fs);
+			createFlightSchedule(fs);
 			cout << "금일 항공기 입출항 정보 불러오기 완료" << endl;
 			cout << "이용자 정보를 불러옵니다...." << endl;
 			createUser(elist);

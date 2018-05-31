@@ -17,6 +17,7 @@ private:
 public:
 	FlightSchedule() {}; //비행일정 디폴트생성자
 	FlightSchedule(string fairline, string fdestination, int* fseat, int fhour, string fshit, int fmin);
-	void takeoff_check(char num, ControlTower &ct); //비행일정 및 좌석 체크 함수
+	void takeoff_check(ControlTower &ct); //비행일정 및 좌석 체크 함수
+	void showthat();
 };
 #endif
