@@ -125,6 +125,7 @@ void leaveprocess(Leavelist* llist[])
 {
 	Blacklist bl;
 	int j;
+	char z;
 	for (int i = 0 ; i < 200; i++)
 	{
 		j = 0;
@@ -137,6 +138,26 @@ void leaveprocess(Leavelist* llist[])
 			cout << "-Departure process completed-" << endl;
 		}
 		cout << "-------------------------------" << endl;
+
+		cout << endl;
+		cout << "Shall we proceed to the next person?	y/n" << endl;
+		switch (getchar())
+		{
+		case'n':
+			cout << endl;
+			cout << "-Departure process program end-" << endl;
+			cout << "-------------------------------" << endl;
+			while (getchar() != '\n');
+			return;
+		case'y':
+			break;
+		default:
+			cout << endl;
+			cout << "error!! worng char keep process" << endl;
+			cout << endl;
+			break;
+		}
+		while (getchar() != '\n');
 	}
 }
 
@@ -159,6 +180,26 @@ void leaveprocess(Entrylist* elist[])
 			
 		}
 		cout << "-------------------------------" << endl;
+		
+		cout << endl;
+		cout << "Shall we proceed to the next person?	y/n" << endl;
+		switch (getchar())
+		{
+		case'n':
+			cout << endl;
+			cout << "-Departure process program end-" << endl;
+			cout << "-------------------------------" << endl;
+			while (getchar() != '\n');
+			return;
+		case'y':
+			break;
+		default:
+			cout << endl;
+			cout << "error!! worng char keep process" << endl;
+			cout << endl;
+			break;
+		}
+		while (getchar() != '\n');
 	}
 }
 
@@ -209,15 +250,19 @@ int main() {
 		switch (getchar())	//	menu switch문 : getchar()를 이용, 문자를 받아서 적용
 		{
 		case 'e':	//	입국 절차 메뉴
+			while (getchar() != '\n');
 			leaveprocess(elist);
 			break;
 		case 'l':	//	출국 절차 메뉴
+			while (getchar() != '\n');
 			leaveprocess(llist);
 			break;
 		case 't':	//	금일 입출항 목록
+			while (getchar() != '\n');
 			Airplainlist(fs);
 			break;
 		case 'o':	//	불법 체류자 체크 메뉴
+			while (getchar() != '\n');
 			Airlinemanagement(fs, ct);
 			break;
 
