@@ -14,6 +14,7 @@
 #include <ctime>
 #include <fstream>
 #include <iomanip>
+#include <Windows.h>
 #pragma warning(disable:4996)
 
 // namespace ¼±¾ð

@@ -129,7 +129,7 @@ void leaveprocess(Leavelist* llist[])
 	for (int i = 0 ; i < 200; i++)
 	{
 		j = 0;
-		cout << "-------------------------------" << endl;
+		cout << "-----------------------------------------------" << endl;
 		llist[i]->showyou();
 		j = bl.reason_print(llist[i]->blacklist());
 		if (j == 0)
@@ -137,7 +137,7 @@ void leaveprocess(Leavelist* llist[])
 			llist[i]->banitem_check();
 			cout << "-Departure process completed-" << endl;
 		}
-		cout << "-------------------------------" << endl;
+		cout << "-----------------------------------------------" << endl;
 
 		cout << endl;
 		cout << "Shall we proceed to the next person?	y/n" << endl;
@@ -146,7 +146,7 @@ void leaveprocess(Leavelist* llist[])
 		case'n':
 			cout << endl;
 			cout << "-Departure process program end-" << endl;
-			cout << "-------------------------------" << endl;
+			cout << "-----------------------------------------------" << endl;
 			while (getchar() != '\n');
 			return;
 		case'y':
@@ -169,7 +169,7 @@ void leaveprocess(Entrylist* elist[])
 	for (int i = 0; i < 200; i++)
 	{
 		j = 0;
-		cout << "-------------------------------" << endl;
+		cout << "-----------------------------------------------" << endl;
 		elist[i]->showyou();
 		j = bl.reason_print(elist[i]->blacklist());
 		if (j == 0)
@@ -179,7 +179,7 @@ void leaveprocess(Entrylist* elist[])
 			cout << "-Departure process completed-" << endl;
 			
 		}
-		cout << "-------------------------------" << endl;
+		cout << "-----------------------------------------------" << endl;
 		
 		cout << endl;
 		cout << "Shall we proceed to the next person?	y/n" << endl;
@@ -188,7 +188,7 @@ void leaveprocess(Entrylist* elist[])
 		case'n':
 			cout << endl;
 			cout << "-Departure process program end-" << endl;
-			cout << "-------------------------------" << endl;
+			cout << "-----------------------------------------------" << endl;
 			while (getchar() != '\n');
 			return;
 		case'y':
@@ -206,14 +206,15 @@ void leaveprocess(Entrylist* elist[])
 void Airplainlist(FlightSchedule* fschedule[])
 {
 	int i = 0;
-	cout << "Leave Airline" << endl;
-	cout <<setw(20)<< "Airline\t" << setw(10) << "Destination\t" << setw(10) << "First class\t" << setw(10) << "Bussiness\t" << setw(10) << "Economy\t" << setw(10) << " Time" << endl;
+
+	cout << "『Leave Airline』" << endl;
+	cout << setw(21) << "【 Airline 】" << setw(19) << "【 Destination 】" << setw(14) << "【 First 】" << setw(17) << "【 Bussiness 】" << setw(16) << "【 Economy 】" << setw(14) << "【 Time 】" << endl;
 	for (i; i < 80; i++)
 	{
 		fschedule[i]->showthat();
 	}
-	cout << "Entry Airline" << endl;
-	cout << setw(20) << "Airline\t" << setw(10) << "Destination\t" << setw(10) << "First class\t" << setw(10) << "Bussiness\t" << setw(10) << "Economy\t" << setw(10) << "Time" << endl;
+	cout << "\n『Entry Airline』" << endl;
+	cout << setw(21) << "【 Airline 】" << setw(19) << "【 Destination 】" << setw(14) << "【 First 】" << setw(17) << "【 Bussiness 】" << setw(16) << "【 Economy 】" << setw(14) << "【 Time 】" << endl;
 	for (i; i < 100; i++)
 	{
 		fschedule[i]->showthat();
@@ -267,13 +268,19 @@ int main() {
 			break;
 
 		case 'i':	//	이용자 정보 파일 입력 메뉴
-			cout << "금일 항공기 입출항 정보를 불러옵니다...." << endl;
+			cout << "금일 항공기 입출항 정보를 불러옵니다";
 			createFlightSchedule(fs);
+			Sleep(400); cout << '.';  Sleep(400); cout << '.'; Sleep(400); cout << '.'; Sleep(400); cout << '.' << endl;
+			Sleep(400);
 			cout << "금일 항공기 입출항 정보 불러오기 완료" << endl;
-			cout << "이용자 정보를 불러옵니다...." << endl;
+			Sleep(200);
+			cout << "이용자 정보를 불러옵니다";
 			createUser(elist);
 			createUser(llist);
+			Sleep(400); cout << '.';  Sleep(400); cout << '.'; Sleep(400); cout << '.'; Sleep(400); cout << '.' << endl;
+			Sleep(200);
 			cout << "이용자 정보 불러오기 완료" << endl;
+			Sleep(200);
 			break;
 		case 'q':	//	프로그램 종료 메뉴
 			cout << endl;
