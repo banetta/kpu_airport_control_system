@@ -50,19 +50,12 @@ void Entrylist::banitem_check()
 void Entrylist::overEntrylist_check()
 {
 	int lenghtofstay;					//체류기간을 받는 변수
-	//struct tm t;						//입국 날짜를 받기 위한 라이브러리 구조체
 	time_t     tm_st;					//입국 날짜를 받기 위한 초단위 변수
 	time_t     tm_nd;					//현재 날짜를 받기 위한 초단위 변수
 	double     d_diff;
 
 	tm_st = inittime(entrylist_eday);	//	입국날짜를 입력
 
-	//t.tm_year = entrylist_eday[0] - 1900;	//현재 년도를 입력, 함수 특성상 연도에 -1900을 해야함
-	//t.tm_mon = entrylist_eday[1] - 1;		//현재 월을 입력, 함수 특성상 월에 -1을 해야함
-	//t.tm_mday = entrylist_eday[2];			//현재 일을 입력
-	//t.tm_hour = t.tm_min = t.tm_sec = t.tm_isdst = 0; //나머지를 모두 0으로 초기화
-
-	//tm_st = mktime(&t);						//입국 날짜를 받은 구조체의 변수를 초단위 변수에 입력
 	time(&tm_nd);							//현재 날짜를 초단위 변수에 입력
 
 	d_diff = difftime(tm_nd, tm_st);		//입국 날짜부터 현재 날짜까지 초단위 차이를 계산
