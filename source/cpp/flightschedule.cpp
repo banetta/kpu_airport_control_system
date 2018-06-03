@@ -31,7 +31,7 @@ void FlightSchedule::takeoff_check(ControlTower &ct)
 		if (min >= 60)
 		{
 			min -= 60;
-			hour = +1;
+			hour +=1;
 		}
 		showthat();
 		if (set > 3 && set2 >0)
