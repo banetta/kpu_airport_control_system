@@ -28,28 +28,28 @@ void FlightSchedule::takeoff_check(ControlTower &ct)
 		set = ct.weathercenter_check(); // 기상청
 		set2 = ct.runway_check(); // 활주로
 
-		if (min >= 60)
-		{
+		if (min >= 60)	{
 			min -= 60;
 			hour +=1;
 		}
 		showthat();
-		if (set > 3 && set2 >0)
-		{
+		if (set > 3 && set2 >0)	{
+			cout << endl;
 			cout << setw(20) << "Delay in Airplain, " << "Reason : Bad weather. \n" << endl;
 			min += 30;
 		}
-		else  if (set2 == 0 && set < 4)
-		{
+		else  if (set2 == 0 && set < 4)	{
+			cout << endl;
 			cout << setw(20) << "Delay in Airplain, " << "Reason : Runway exceeded. \n" << endl;
 			min += 10;
 		}
 		else if (set > 3 && set2 == 0) {
+			cout << endl;
 			cout << setw(20) << "Delay in Airplain, " << "Reason : Bad weather and Runway exceeded. \n" << endl;
 			min += 40;
 		}
-		else
-		{
+		else {
+			cout << endl;
 			cout << setw(20) << "complete.\n" << endl;
 			i = 1;
 		}

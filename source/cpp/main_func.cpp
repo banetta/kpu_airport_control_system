@@ -166,23 +166,25 @@ void leaveprocess(Leavelist* llist[])
 
 		cout << endl;
 		cout << "Shall we proceed to the next person?	y/n" << endl;
+		cout << "[Leave]:# ";
 		switch (getchar())
 		{
 		case'n':
+			while (getchar() != '\n');
 			cout << endl;
 			cout << "-Departure process program end-" << endl;
 			cout << "-----------------------------------------------" << endl;
-			while (getchar() != '\n');
 			return;
 		case'y':
+			while (getchar() != '\n');
 			break;
 		default:
+			while (getchar() != '\n');
 			cout << endl;
 			cout << "error!! worng char keep process" << endl;
 			cout << endl;
 			break;
 		}
-		while (getchar() != '\n');
 	}
 }
 
@@ -208,59 +210,119 @@ void leaveprocess(Entrylist* elist[])
 
 		cout << endl;
 		cout << "Shall we proceed to the next person?	y/n" << endl;
+		cout << "[Entry]:# ";
 		switch (getchar())
 		{
 		case'n':
+			while (getchar() != '\n');
 			cout << endl;
 			cout << "-Departure process program end-" << endl;
 			cout << "-----------------------------------------------" << endl;
-			while (getchar() != '\n');
 			return;
 		case'y':
+			while (getchar() != '\n');
 			break;
 		default:
+			while (getchar() != '\n');
 			cout << endl;
 			cout << "error!! worng char keep process" << endl;
 			cout << endl;
 			break;
 		}
-		while (getchar() != '\n');
 	}
 }
 
 void Airplainlist(FlightSchedule* fschedule[])
 {
 	int i = 0;
-
-	cout << "『Leave Airline』" << endl;
-	cout << setw(21) << "【 Airline 】" << setw(19) << "【 Destination 】" << setw(14) << "【 First 】" << setw(17) << "【 Bussiness 】" << setw(16) << "【 Economy 】" << setw(14) << "【 Time 】" << endl;
-	for (i; i < 80; i++)
+	while (true)
 	{
-		fschedule[i]->showthat();
-	}
-	cout << "\n『Entry Airline』" << endl;
-	cout << setw(21) << "【 Airline 】" << setw(19) << "【 Destination 】" << setw(14) << "【 First 】" << setw(17) << "【 Bussiness 】" << setw(16) << "【 Economy 】" << setw(14) << "【 Time 】" << endl;
-	for (i; i < 100; i++)
-	{
-		fschedule[i]->showthat();
+		cout << "Choose Schedule:" << endl;
+		cout << "L. 『Leave Airline』" << endl;
+		cout << "E. 『Entry Airline』" << endl;
+		cout << "Q. 『Quit』" << endl;
+		cout << "[Schedule]:# ";
+		switch (getchar())
+		{
+		case'l':
+		case'L':
+			while (getchar() != '\n');
+			cout << "『Leave Airline』" << endl;
+			cout << setw(21) << "【 Airline 】" << setw(19) << "【 Destination 】" << setw(14) << "【 First 】" << setw(17) << "【 Bussiness 】" << setw(16) << "【 Economy 】" << setw(14) << "【 Time 】" << endl;
+			for (i = 0; i < 80; i++)
+			{
+				fschedule[i]->showthat();
+			}
+			break;
+		case'e':
+		case'E':
+			while (getchar() != '\n');
+			cout << "\n『Entry Airline』" << endl;
+			cout << setw(21) << "【 Airline 】" << setw(19) << "【 Destination 】" << setw(14) << "【 First 】" << setw(17) << "【 Bussiness 】" << setw(16) << "【 Economy 】" << setw(14) << "【 Time 】" << endl;
+			for (i = 80; i < 100; i++)
+			{
+				fschedule[i]->showthat();
+			}
+			break;
+		case'q':
+		case'Q':
+			while (getchar() != '\n');
+			cout << endl;
+			cout << "Schedule Print end" << endl;
+			cout << endl;
+			return;
+		default:
+			while (getchar() != '\n');
+			cout << endl;
+			cout << "error!! worng char" << endl;
+			cout << endl;
+			break;
+		}
 	}
 }
 
 void Airlinemanagement(FlightSchedule* fschedule[], ControlTower &ct)
 {
+	cout << "-----------------------------------------------" << endl;
 	for (int i = 0; i < 100; i++)
 	{
 		fschedule[i]->takeoff_check(ct);
 	}
+	cout << endl;
+	cout << endl;
+	cout << "-Airline Management process program end-" << endl;
+	cout << "-----------------------------------------------" << endl;
 }
 
 void Illegal_resident(Entrylist* blist[])
 {
 	for (int i = 0; i < 20; i++)
 	{
+		cout << "-----------------------------------------------" << endl;
 		blist[i]->showyou();
 		blist[i]->overEntrylist_check();
+		cout << "-----------------------------------------------" << endl;
+		cout << endl;
+		cout << endl;
+		cout << "Shall we proceed to the next person?	y/n" << endl;
+		cout << "[Illegal]:# ";
+		switch (getchar())
+		{
+		case'n':
+			while (getchar() != '\n');
+			cout << endl;
+			cout << "-Illegal Resident process program end-" << endl;
+			cout << "-----------------------------------------------" << endl;
+			return;
+		case'y':
+			while (getchar() != '\n');
+			break;
+		default:
+			while (getchar() != '\n');
+			cout << endl;
+			cout << "error!! worng char keep process" << endl;
+			cout << endl;
+			break;
+		}
 	}
-
 }
-// 단일 함수 선언
