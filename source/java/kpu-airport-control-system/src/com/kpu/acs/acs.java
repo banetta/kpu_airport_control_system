@@ -7,8 +7,8 @@ import java.io.*;
 
 class Ticket {
 	private String ticket_seat;
-	private int entryday[]; // 입국일
-	private int leaveday[]; // 출국일
+	private int entryday[] = {0,0,0}; // 입국일
+	private int leaveday[] = {0,0,0}; // 출국일
 
 	Ticket(String userticketseat, int userentryday[], int userleaveday[]) {
 		ticket_seat = userticketseat;
@@ -29,8 +29,7 @@ class User {
 	public User() {
 	}
 
-	public User(int userpassnum, String username, int userage, String userregion, String userticketseat,
-			int userentryday[], int userleaveday[]) {
+	public User(int userpassnum, String username, int userage, String userregion, String userticketseat, int userentryday[], int userleaveday[]) {
 		passnum = userpassnum;
 		name = username;
 		age = userage;
@@ -72,15 +71,15 @@ class Leaveitem {
 }
 
 class Leavelist extends User {
-	private int leavelist_eday[];
-	private int leavelist_lday[]; // 출국일 [0]은 년,[1]은 월,[2]은 일
-	private Leaveitem leavepack; // 출국자 짐
+	private int leavelist_eday[] = {0,0,0};
+	private int leavelist_lday[] = {0,0,0}; // 출국일 [0]은 년,[1]은 월,[2]은 일
+	private Leaveitem leavepack = new Leaveitem(); // 출국자 짐
 
 	public Leavelist() {
 	} // 출국자의 default 생성자
 
-	public Leavelist(int userpassnum, String username, int userage, String userregion, String userticketseat,
-			int userentryday[], int userleaveday[]) {
+	public Leavelist(int userpassnum, String username, int userage, String userregion, String userticketseat, int userentryday[],
+			int userleaveday[]) {
 		super(userpassnum, username, userage, userregion, userticketseat, userentryday, userleaveday);
 		for (int i = 0; i < 3; i++) {
 			leavelist_eday[i] = userentryday[i];
@@ -130,7 +129,7 @@ class RFID {
 }
 
 class Entryitem {
-	private RFID rfid;
+	private RFID rfid = new RFID();
 
 	Entryitem() {
 	}
@@ -148,20 +147,21 @@ class Entryitem {
 }
 
 class Entrylist extends User {
-	private int entrylist_eday[]; // 입국일 [0]은 년,[1]은 월,[2]은 일
-	private int entrylist_lday[]; // 출국일 "
-	private Entryitem entrypack[]; // 입국자 짐
+	private int entrylist_eday[] = {0,0,0}; // 입국일 [0]은 년,[1]은 월,[2]은 일
+	private int entrylist_lday[] = {0,0,0}; // 출국일 "
+	private Entryitem entrypack[] = new Entryitem[5]; // 입국자 짐
 	private int isBanitem;
 
 	public Entrylist() {
 	}
 
-	public Entrylist(int userpassnum, String username, int userage, String userregion, String userticketseat,
-			int userentryday[], int userleaveday[]) {
+	public Entrylist(int userpassnum, String username, int userage, String userregion, String userticketseat, int userentryday[],
+			int userleaveday[]) {
 		super(userpassnum, username, userage, userregion, userticketseat, userentryday, userleaveday);
 		Random random = new Random();
 
 		isBanitem = random.nextInt(100) % 20;
+			
 		for (int i = 0; i < 3; i++) {
 			entrylist_eday[i] = userentryday[i]; // 입국일자 입력
 			entrylist_lday[i] = userleaveday[i];
@@ -172,7 +172,7 @@ class Entrylist extends User {
 		{
 			entrypack[j] = new Entryitem(); // 입국자 수화물 생성 index 번호를 넣어주고 ++
 			entrypack[j].item_init();
-			entrypack[(j + 1)] = null;
+			//entrypack[(j + 1)] = null;
 			j++;
 		}
 	}
@@ -231,7 +231,7 @@ class Entrylist extends User {
 class Flightschedule {
 	private String airline;
 	private String destination;
-	private int seat[];
+	private int seat[] = {0,0,0};
 	private int hour2;
 	private String shit2;
 	private int min2;
@@ -252,11 +252,9 @@ class Flightschedule {
 
 	void showthat() {
 		if (min2 == 0)
-			System.out.printf(airline, "\t", destination, "\t", seat[0], "\t", seat[1], "\t", seat[2], "\t", hour2,
-					shit2, "0", min2);
+			System.out.printf(airline, "\t", destination, "\t", seat[0], "\t", seat[1], "\t", seat[2], "\t", hour2, shit2, "0", min2);
 		else
-			System.out.printf("%s\t %s\t %d\t %d\t %d\t %d%s%d", airline, destination, seat[0], seat[1], seat[2], hour2,
-					shit2, min2);
+			System.out.printf("%s\t %s\t %d\t %d\t %d\t %d%s%d", airline, destination, seat[0], seat[1], seat[2], hour2, shit2, min2);
 	}
 
 	void takeoff_check(Controltower ct) {// 비행일정 및 좌석 체크 함수
@@ -367,142 +365,246 @@ class Tariff {
 }
 
 class main_func {
-	void createUser(Entrylist elist[]) {
+	main_func(){};
+	void createUser(Entrylist[] elist) throws IOException {
+		
+		String fbf = null;
         int fpassnum;
         int fage;
-        int []fentrtday; 
-        int []fleaveday;
+        int fentryday[] = {0,0,0}; 
+        int fleaveday[] = {0,0,0};
         String fname, fregion, fseat;
-        
-        File file=new File("entry.txt");
-        try {
-           Scanner sc = new Scanner(file);
-           for (int i = 0; !sc.hasNext(); i++) {
-              elist[i] = new Entrylist(fpassnum, fname, fage, fregion, fseat, fentrtday, fleaveday);
-           }
-        }
-        catch(FileNotFoundException e) {
-           System.out.println("file is empty.");
-        }
 
-	// if (file.is_open() == true)
-	// {
-	// file.close();
-	// }
-	// }
+		BufferedReader b = new BufferedReader(new FileReader("entry.txt"));
+		String line = null;
+		int i = 1;
+		int j = 0;
+		
+		while ((line = b.readLine()) != null) {
+			StringTokenizer tk = new StringTokenizer(line, "\t");
+			String token = null;
+			System.out.println(tk.countTokens());
+			while (tk.hasMoreTokens()) {
+				fbf = tk.nextToken();
+				fpassnum = Integer.parseInt(fbf);
+				fbf = null;
+				fname = tk.nextToken();
+				fbf = tk.nextToken();
+				fage = Integer.parseInt(fbf);
+				fbf = null;
+				fregion = tk.nextToken();
+				fseat = tk.nextToken();
+				fbf = tk.nextToken();
+				fentryday[0] = Integer.parseInt(fbf);
+				fbf = null;
+				
+				fbf = tk.nextToken();
+				fentryday[1] = Integer.parseInt(fbf);
+				fbf = null;
+				
+				fbf = tk.nextToken();
+				fentryday[2] = Integer.parseInt(fbf);
+				fbf = null;
+				
+				fbf = tk.nextToken();
+				fleaveday[0] = Integer.parseInt(fbf);
+				fbf = null;
+				
+				fbf = tk.nextToken();
+				fleaveday[1] = Integer.parseInt(fbf);
+				fbf = null;
+				
+				fbf = tk.nextToken();
+				fleaveday[2] = Integer.parseInt(fbf);
+				fbf = null;
+				
 
-	void createban(Entrylist blist[]) {
-
-        int fpassnum;
-        int fage;
-        int []fentrtday;
-        int []fleaveday;
-        String fname, fregion, fseat;
-        File file=new File("Illegal_resident.txt");
-
-        try {
-              Scanner sc = new Scanner(file);
-              for (int i = 0; !sc.hasNext()(); i++) {
-                 file >> fpassnum >> fname >> fage >> fregion >> fseat >> fentrtday[0] >> fentrtday[1] >> fentrtday[2] >> fleaveday[0] >> fleaveday[1] >> fleaveday[2];
-                 blist[i] = new Entrylist(fpassnum, fname, fage, fregion, fseat, fentrtday, fleaveday);
-              }
-           }
-           catch(FileNotFoundException e) {
-              System.out.println("file is empty.");
-           }
-
-	// if (file.is_open() == true)
-	// {
-	// file.close();
-	// }
-	// }
-
-	void createUser(Leavelist llist[]) {
-
-        int fpassnum, fage, fentrtday[], fleaveday[];
-        String fname, fregion, fseat;
-        
-        File file=new File("leave.txt");
-
-        try {
-              Scanner sc = new Scanner(file);
-              for (int i = 0; !sc.hasNext(); i++) {
-                
-              }
-                 file >> fpassnum >> fname >> fage >> fregion >> fseat >> fentrtday[0] >> fentrtday[1] >> fentrtday[2] >> fleaveday[0] >> fleaveday[1] >> fleaveday[2];
-
-                 llist[i] = new Leavelist(fpassnum, fname, fage, fregion, fseat, fentrtday, fleaveday);
-              }
-           }catch(
-
-	FileNotFoundException e)
-	{
-		System.out.println("file is empty.");
+				elist[j] = new Entrylist(fpassnum,fname,fage,fregion,fseat,fentryday,fleaveday);
+			}
+			i++;
+			j++;
+		}
+		b.close();
 	}
 
-	// if (file.is_open() == true)
-	// {
-	// file.close();
-	// }
-	// }
+	void createban(Entrylist[] blist) throws IOException {
 
-	void createFlightSchedule(FlightSchedule fschedule[]) {
+		String fbf = null;
+        int fpassnum;
+        int fage;
+        int []fentryday = {0,0,0}; 
+        int []fleaveday = {0,0,0};
+        String fname, fregion, fseat;
 
-        String qairline;
-        String qdestination;
-        int qseat[];
+		BufferedReader b = new BufferedReader(new FileReader("Illegal_resident.txt"));
+		String line = null;
+		int i = 1;
+		int j = 0;
+		
+		while ((line = b.readLine()) != null) {
+			StringTokenizer tk = new StringTokenizer(line, "\t");
+			String token = null;
+			System.out.println(tk.countTokens());
+			while (tk.hasMoreTokens()) {
+				fbf = tk.nextToken();
+				fpassnum = Integer.parseInt(fbf);
+				fbf = null;
+				fname = tk.nextToken();
+				fbf = tk.nextToken();
+				fage = Integer.parseInt(fbf);
+				fregion = tk.nextToken();
+				fseat = tk.nextToken();
+				fbf = tk.nextToken();
+				fentryday[0] = Integer.parseInt(fbf);
+				fbf = null;
+				
+				fbf = tk.nextToken();
+				fentryday[1] = Integer.parseInt(fbf);
+				fbf = null;
+				
+				fbf = tk.nextToken();
+				fentryday[2] = Integer.parseInt(fbf);
+				fbf = null;
+				
+				fbf = tk.nextToken();
+				fleaveday[0] = Integer.parseInt(fbf);
+				fbf = null;
+				
+				fbf = tk.nextToken();
+				fleaveday[1] = Integer.parseInt(fbf);
+				fbf = null;
+				
+				fbf = tk.nextToken();
+				fleaveday[2] = Integer.parseInt(fbf);
+				fbf = null;
+				
+				//System.out.println(fpassnum+"\t"+ fname+"\t"+ fage+"\t"+ fregion+"\t"+ fseat+"\t"+ fentryday[0]+"\t"+fentryday[1]+"\t"+fentryday[2]+"\t"+ fleaveday[0]+"\t"+fleaveday[1]+"\t"+fleaveday[2]);
+				blist[j] = new Entrylist(fpassnum, fname, fage, fregion, fseat, fentryday, fleaveday);
+			}
+			i++;
+			j++;
+		}
+		b.close();
+	}
+
+	@SuppressWarnings("null")
+	void createUser(Leavelist[] llist) throws IOException {
+
+		String fbf = null;
+        int fpassnum;
+        int fage;
+        int []fentryday = {0,0,0}; 
+        int []fleaveday = {0,0,0};
+        String fname, fregion, fseat;
+
+		BufferedReader b = new BufferedReader(new FileReader("Illegal_resident.txt"));
+		String line = null;
+		int i = 1;
+		int j = 0;
+		
+		while ((line = b.readLine()) != null) {
+			StringTokenizer tk = new StringTokenizer(line, "\t");
+			String token = null;
+			System.out.println(tk.countTokens());
+			while (tk.hasMoreTokens()) {
+				fbf = tk.nextToken();
+				fpassnum = Integer.parseInt(fbf);
+				fbf = null;
+				fname = tk.nextToken();
+				fbf = tk.nextToken();
+				fage = Integer.parseInt(fbf);
+				fbf = null;
+				fregion = tk.nextToken();
+				fseat = tk.nextToken();
+				fbf = tk.nextToken();
+				fentryday[0] = Integer.parseInt(fbf);
+				fbf = null;
+				
+				fbf = tk.nextToken();
+				fentryday[1] = Integer.parseInt(fbf);
+				fbf = null;
+				
+				fbf = tk.nextToken();
+				fentryday[2] = Integer.parseInt(fbf);
+				fbf = null;
+				
+				fbf = tk.nextToken();
+				fleaveday[0] = Integer.parseInt(fbf);
+				fbf = null;
+				
+				fbf = tk.nextToken();
+				fleaveday[1] = Integer.parseInt(fbf);
+				fbf = null;
+				
+				fbf = tk.nextToken();
+				fleaveday[2] = Integer.parseInt(fbf);
+				fbf = null;
+				
+				//System.out.println(fpassnum+"\t"+ fname+"\t"+ fage+"\t"+ fregion+"\t"+ fseat+"\t"+ fentryday[0]+"\t"+fentryday[1]+"\t"+fentryday[2]+"\t"+ fleaveday[0]+"\t"+fleaveday[1]+"\t"+fleaveday[2]);
+				llist[i] = new Leavelist(fpassnum, fname, fage, fregion, fseat, fentryday, fleaveday);
+			}
+			i++;
+			j++;
+		}
+		b.close();
+	}
+	@SuppressWarnings("null")
+	void createFlightSchedule(Flightschedule[] fschedule) throws IOException{
+
+		String fbf = null;
+		String qairline;
+		String qdestination;
+        int qseat[] = {0,0,0};
         int qhour;
         String qshit;
         int qmin;
-       
-        int i = 0;
-      
-        File file=new File("Leave_Airplane.txt");
 
-        try {
-              Scanner sc = new Scanner(file);
-              for (int i = 0; !sc.hasNext()(); i++) {
-                 file >> qairline >> qdestination >> qseat[0] >> qseat[1] >> qseat[2] >> qhour >> qshit >> qmin;
-
-                    fschedule[i] = new FlightSchedule(qairline, qdestination, qseat, qhour, qshit, qmin);
-              }
-           }
-           catch(FileNotFoundException e) {
-              System.out.println("file is empty.");
-           }
-
+		BufferedReader b = new BufferedReader(new FileReader("Leave_Airplane.txt"));
+		String line = null;
+		int i = 1;
+		int j = 0;
+		
+		while ((line = b.readLine()) != null) {
+			StringTokenizer tk = new StringTokenizer(line, "\t");
+			String token = null;
+			System.out.println(tk.countTokens());
+			while (tk.hasMoreTokens()) {
+				qairline = tk.nextToken();
+				qdestination = tk.nextToken();
+				fbf = tk.nextToken();
+				qseat[0] = Integer.parseInt(fbf);
+				fbf = null;
+				
+				fbf = tk.nextToken();
+				qseat[1] = Integer.parseInt(fbf);
+				fbf = null;
+				
+				fbf = tk.nextToken();
+				qseat[2] = Integer.parseInt(fbf);
+				fbf = null;
+				
+				fbf = tk.nextToken();
+				qhour = Integer.parseInt(fbf);
+				fbf = null;
+				
+				qshit = tk.nextToken();
+				fbf = tk.nextToken();
+				qmin = Integer.parseInt(fbf);
+				fbf = null;
+				
+				fschedule[j] = new Flightschedule(qairline, qdestination, qseat, qhour, qshit, qmin);
+			}
+			i++;
+			j++;
+		}
+		b.close();
+	}
         
-          
-       // if (file.is_open() == true)
-       // {
-        //   file.close();
-       // }
 
-       
-        File file=new File("Entry_Airplane.txt");
-
-        try {
-              Scanner sc = new Scanner(file);
-              for (int i = 0; !sc.hasNext()(); i++) 
-              {
-                 file >> qairline >> qdestination >> qseat[0] >> qseat[1] >> qseat[2] >> qhour >> qshit >> qmin;
-
-                    fschedule[i] = new FlightSchedule(qairline, qdestination, qseat, qhour, qshit, qmin);
-              }
-           }
-           catch(FileNotFoundException e) {
-              System.out.println("file is empty.");
-           }
-
-	// if (file.is_open() == true)
-	// {
-	// file.close();
-	// }
-	// }
-
+	@SuppressWarnings("null")
 	void leaveprocess(Leavelist llist[])
      {
-        Blacklist bl;
+        Blacklist bl = new Blacklist();
         int j;
         char z;
         Scanner s = new Scanner(System.in);
@@ -538,7 +640,7 @@ class main_func {
            default:
               while (s1.nextLine().charAt(0) != '\n');
               System.out.println ("") ;
-              System.out.println ( "error!! worng char keep process" ( ;
+              System.out.println ( "error!! worng char keep process" ) ;
               System.out.println ("");
               break;
            }
@@ -546,8 +648,8 @@ class main_func {
      }
 
 	void leaveprocess(Entrylist elist[]) {
-		Blacklist bl;
-		TARIFF ta;
+		Blacklist bl = new Blacklist();
+		Tariff ta = new Tariff();
 		int j;
 		for (int i = 0; i < 200; i++) {
 			j = 0;
@@ -556,7 +658,7 @@ class main_func {
 			j = bl.reason_print(elist[i].blacklist());
 			if (j == 0) {
 				elist[i].banitem_check();
-				ta.Tariff_print(elist[i]);
+				ta.Tairff_print(elist[i]);
 				System.out.println("-Departure process completed-");
 
 			}
@@ -569,19 +671,13 @@ class main_func {
 
 			switch (s1.nextLine().charAt(0)) {
 			case 'n':
-				while (s1.nextLine().charAt(0) != '\n')
-					;
 				System.out.println("");
 				System.out.println("-Departure process program end-");
 				System.out.println("-----------------------------------------------");
 				return;
 			case 'y':
-				while (s1.nextLine().charAt(0) != '\n')
-					;
 				break;
 			default:
-				while (s1.nextLine().charAt(0) != '\n')
-					;
 				System.out.println("");
 				System.out.println("error!! worng char keep process");
 				System.out.println("");
@@ -590,9 +686,9 @@ class main_func {
 		}
 	}
 
-	void Airplainlist(FlightSchedule fschedule[])
+	void Airplainlist(Flightschedule fschedule[])
      {
-        int i = 0;
+		int i = 0;
         while (true)
         {
            System.out.println ( "Choose Schedule:");
@@ -609,7 +705,7 @@ class main_func {
         
               while (s1.nextLine().charAt(0)!= '\n');
               System.out.println ( "『Leave Airline』" ) ;
-              System.out.println ( setw(21) ( "【 Airline 】" ) setw(19) ( "【 Destination 】" ) setw(14) ( "【 First 】" ) setw(17) ( "【 Bussiness 】" ) setw(16) ( "【 Economy 】" ) setw(14) ( "【 Time 】" ) ;
+              System.out.println ( "\t"+ ( "【 Airline 】" ) +"\t"+ ( "【 Destination 】" ) +"\t"+ ( "【 First 】" ) +"\t"+ ( "【 Bussiness 】" ) +"\t"+ ( "【 Economy 】" ) +"\t"+ ( "【 Time 】" )) ;
               for (i = 0; i < 80; i++)
               {
                  fschedule[i].showthat();
@@ -619,7 +715,7 @@ class main_func {
            case'E':
               while (s1.nextLine().charAt(0)!= '\n');
               System.out.println ( "\n『Entry Airline』") ;
-              System.out.println ( setw(21) ( "【 Airline 】" ) setw(19) ( "【 Destination 】" ) setw(14) ( "【 First 】" ) setw(17) ( "【 Bussiness 】" ) setw(16) ( "【 Economy 】" ) setw(14) ( "【 Time 】" ) ;
+              System.out.println ( "\t"+ ( "【 Airline 】" ) +"\t"+ ( "【 Destination 】" ) +"\t"+ ( "【 First 】" ) +"\t"+ ( "【 Bussiness 】" ) +"\t"+ ( "【 Economy 】" ) +"\t"+ ( "【 Time 】" )) ;
               for (i = 80; i < 100; i++)
               {
                  fschedule[i].showthat();
@@ -691,17 +787,20 @@ class main_func {
 }
 
 public class acs {
-	public static int main(String[] args) {
+		public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		// Airport Control System Main Function
 		// coding by Banetta Han Sang Kim
 
-		Flightschedule[] fs;
-		Controltower ct;
-		Entrylist[] elist;
-		Leavelist[] llist;
-		Entrylist[] banlist;
+		Controltower ct = new Controltower();
+		
 		Scanner sc = new Scanner(System.in);
+		main_func mf = new main_func();
+		
+		Flightschedule[] fs = new Flightschedule[100];
+		Entrylist[] elist = new Entrylist[200];
+		Leavelist[] llist = new Leavelist[200];
+		Entrylist[] banlist = new Entrylist[30];
 
 		System.out.println("===   Airport Control System [ACS]   ===\n");
 		while (true) // Menu 구성
@@ -720,50 +819,49 @@ public class acs {
 			switch (sc.nextLine().charAt(0)) // menu switch문 : getchar()를 이용, 문자를 받아서 적용
 			{
 			case 'i': // 이용자 정보 파일 입력 메뉴
-				while (sc.nextLine().charAt(0) != '\n')
-					; // getchar()사용시 버퍼에 입력값이 남아서 이중실행이 될 수 있기 때문에 버퍼를 비우는 작업을 한다.
+				//while (sc.nextLine().charAt(0) != '\n'); // getchar()사용시 버퍼에 입력값이 남아서 이중실행이 될 수 있기 때문에 버퍼를 비우는 작업을 한다.
 				System.out.println("금일 항공기 입출항 정보를 불러옵니다");
-				createFlightSchedule(fs);
+				mf.createFlightSchedule(fs);
 				System.out.println("금일 항공기 입출항 정보 불러오기 완료");
 				System.out.println("이용자 정보를 불러옵니다");
-				createUser(elist);
-				createUser(llist);
-				createban(banlist);
+				mf.createUser(elist);
+				mf.createUser(llist);
+				mf.createban(banlist);
 				System.out.println("이용자 정보 불러오기 완료");
 				break;
 			case 'e': // 입국 절차 메뉴
-				while (sc.nextLine().charAt(0) != '\n')
+				//while (sc.nextLine().charAt(0) != '\n')
 					; // 버퍼를 비우는 작업.
-				leaveprocess(elist);
+				mf.leaveprocess(elist);
 				break;
 			case 'l': // 출국 절차 메뉴
-				while (sc.nextLine().charAt(0) != '\n')
+				//while (sc.nextLine().charAt(0) != '\n')
 					; // 버퍼를 비우는 작업.
-				leaveprocess(llist);
+				mf.leaveprocess(llist);
 				break;
 			case 't': // 금일 입출항 목록
-				while (c != '\n')
+				//while (sc.nextLine().charAt(0) != '\n')
 					; // 버퍼를 비우는 작업.
-				Airplainlist(fs);
+				mf.Airplainlist(fs);
 				break;
 			case 'a': // 비행기 입출항 관리 메뉴
-				while (sc.nextLine().charAt(0) != '\n')
+				//while (sc.nextLine().charAt(0) != '\n')
 					; // 버퍼를 비우는 작업.
-				Airlinemanagement(fs, ct);
+				mf.Airlinemanagement(fs, ct);
 				break;
 			case 'o': // 불법 체류자 체크 메뉴
-				while (sc.nextLine().charAt(0) != '\n')
+				//while (sc.nextLine().charAt(0) != '\n')
 					; // 버퍼를 비우는 작업.
-				Illegal_resident(banlist);
+				mf.Illegal_resident(banlist);
 				break;
 			case 'q': // 프로그램 종료 메뉴
-				while (sc.nextLine().charAt(0) != '\n')
+				//while (sc.nextLine().charAt(0) != '\n')
 					; // 버퍼를 비우는 작업.
 				System.out.println("\n\n");
 				System.out.println("end of program\n");
-				return 0; // 프로그램 종료
+				return; // 프로그램 종료
 			default: // error 경고문 출력 (메뉴 잘못 입력시)
-				while (sc.nextLine().charAt(0) != '\n')
+				//while (sc.nextLine().charAt(0) != '\n')
 					; // 버퍼를 비우는 작업.
 				System.out.println("\nerror!! worng char\n");
 				break;
