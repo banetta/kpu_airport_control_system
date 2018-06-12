@@ -10,6 +10,7 @@ int main() {
 	Entrylist* elist[200];
 	Leavelist* llist[200];
 	Entrylist* banlist[30];
+	int i = 0;
 
 	cout << "===	Airport Control System [ACS]	===" << endl;
 	while (true)	//	Menu 구성
@@ -44,25 +45,46 @@ int main() {
 			Sleep(200);
 			cout << "이용자 정보 불러오기 완료" << endl;
 			Sleep(200);
+			i++;
 			break;
 		case 'e':	//	입국 절차 메뉴
 			while (getchar() != '\n');	//	버퍼를 비우는 작업.
+			if (i == 0) {
+				cout << "error file input first!!" << endl;
+				break;
+			}
 			leaveprocess(elist);
 			break;
 		case 'l':	//	출국 절차 메뉴
 			while (getchar() != '\n');	//	버퍼를 비우는 작업.
+			if (i == 0) {
+				cout << "error file input first!!" << endl;
+				break;
+			}
 			leaveprocess(llist);
 			break;
 		case 't':	//	금일 입출항 목록
 			while (getchar() != '\n');	//	버퍼를 비우는 작업.
+			if (i == 0) {
+				cout << "error file input first!!" << endl;
+				break;
+			}
 			Airplainlist(fs);
 			break;
 		case 'a':	//	비행기 입출항 관리 메뉴
 			while (getchar() != '\n');	//	버퍼를 비우는 작업.
+			if (i == 0) {
+				cout << "error file input first!!" << endl;
+				break;
+			}
 			Airlinemanagement(fs, ct);
 			break;
 		case 'o':	//	불법 체류자 체크 메뉴
 			while (getchar() != '\n');	//	버퍼를 비우는 작업.
+			if (i == 0) {
+				cout << "error file input first!!" << endl;
+				break;
+			}
 			Illegal_resident(banlist);
 			break;
 		case 'q':	//	프로그램 종료 메뉴
