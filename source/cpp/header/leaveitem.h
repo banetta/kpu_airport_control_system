@@ -10,6 +10,7 @@ public:
 	Leaveitem(int l) :isBanitem(l)
 	{}
 	void isBanitem_init();
+	int sendban();
 };
 
 

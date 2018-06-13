@@ -5,6 +5,7 @@
 Entrylist::Entrylist(int userpassnum, string username, int userage, string userregion, string userticketseat, int* userentryday, int* userleaveday)
 	: User(userpassnum, username, userage, userregion, userticketseat, userentryday, userleaveday)
 {
+	isBanitem = rand() % 20;
 	for (int i = 0; i < 3; i++)
 	{
 		entrylist_eday[i] = userentryday[i];	//	입국일자 입력
@@ -16,46 +17,45 @@ Entrylist::Entrylist(int userpassnum, string username, int userage, string userr
 	{
 		entrypack[j] = new Entryitem;	//	입국자 수화물 생성 index 번호를 넣어주고 ++
 		entrypack[j]->item_init();
-		entrypack[(j + 1)] = NULL;
+	   entrypack[(j + 1)] = NULL;
 		j++;
 	}
 }
 
-void Entrylist::banitem_check(int isBanitem)
+int Entrylist::sendban() {
+	return isBanitem;
+}
+void Entrylist::banitem_check()
 {
-	switch (isBanitem)
+	int i = NULL;
+	for (int j = 0; j < 5; j++)
 	{
-	case 1:											//수화물 내에 금지물품이 없을 경우 isBanitem에 1이 들어감 
-		cout << "수화물 내 금지물품 없음 통과";
-		break;
-	case 0:											//수화물 내에 금지물품이 있을 경우 isBanitem에 0이 들어감 
-		cout << "수화물 내 금지물품 존재" << endl;
-		cout << endl;
-		cout << endl;
-		cout << "금지물품 폐기 완료 통과" << endl;
-		break;
-	default:										//혹시 오류로 인해 다른 값이 들어갔을 경우
-		cout << "수화물 검사 오류" << endl;
-		break;
+		if (entrypack[j] != NULL)
+		{
+			i = sendban();
+			if (i == 0) {
+				cout << "수화물 내 금지물품 존재" << endl;
+				cout << "금지물품 폐기 완료 통과" << endl;
+				break;
+			}
+			else  {
+				cout << "수화물 내 금지물품 없음 통과" << endl;
+				break;
+			}
+		}
 	}
+	
 }
 
 void Entrylist::overEntrylist_check()
 {
 	int lenghtofstay;					//체류기간을 받는 변수
-	//struct tm t;						//입국 날짜를 받기 위한 라이브러리 구조체
 	time_t     tm_st;					//입국 날짜를 받기 위한 초단위 변수
 	time_t     tm_nd;					//현재 날짜를 받기 위한 초단위 변수
 	double     d_diff;
 
 	tm_st = inittime(entrylist_eday);	//	입국날짜를 입력
 
-	//t.tm_year = entrylist_eday[0] - 1900;	//현재 년도를 입력, 함수 특성상 연도에 -1900을 해야함
-	//t.tm_mon = entrylist_eday[1] - 1;		//현재 월을 입력, 함수 특성상 월에 -1을 해야함
-	//t.tm_mday = entrylist_eday[2];			//현재 일을 입력
-	//t.tm_hour = t.tm_min = t.tm_sec = t.tm_isdst = 0; //나머지를 모두 0으로 초기화
-
-	//tm_st = mktime(&t);						//입국 날짜를 받은 구조체의 변수를 초단위 변수에 입력
 	time(&tm_nd);							//현재 날짜를 초단위 변수에 입력
 
 	d_diff = difftime(tm_nd, tm_st);		//입국 날짜부터 현재 날짜까지 초단위 차이를 계산

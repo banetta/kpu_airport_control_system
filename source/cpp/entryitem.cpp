@@ -10,7 +10,6 @@ void Entryitem::item_init()
 	buyday[1] = (rand() % 12) + 1;
 	buyday[2] = (rand() % 27) + 1;
 
-	isBanitem = rand() % 100;
 	rfid = new RFID;
 	rfid->RFID_init(pay, buyday);
 }
@@ -19,3 +18,4 @@ int Entryitem::passing_price(int* entryday, int* leaveday) {
 
 	return rfid->RFID_buypick(entryday, leaveday);
 }
+

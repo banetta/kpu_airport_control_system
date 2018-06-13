@@ -13,7 +13,8 @@
 #include <string>
 #include <ctime>
 #include <fstream>
-
+#include <iomanip>
+#include <Windows.h>
 #pragma warning(disable:4996)
 
 // namespace ¼±¾ð
@@ -30,15 +31,10 @@ using namespace std;
 #include "rfid.h"	//	rfid header, rfid.cpp
 #include "entryitem.h"	//	entry item header, entryitem.cpp
 #include "entrylist.h"	//	entry list  header, entrylist.cpp
-#include "seat.h"	//	seat header, seat.cpp
 #include "flightschedule.h"	//	flightschedule header, flightschedule.cpp
-//#include "controltower.h"	//	controltower header, controltower.cpp
+#include "controltower.h"	//	controltower header, controltower.cpp
 #include "blacklist.h"	//	blacklist header, blacklist.cpp
 #include "tariff.h"	//	tariff header, tariff.cpp
-
-time_t inittime(int* i);
-void createUser(Entrylist* elist);
-void createUser(Leavelist* llist);
-
+#include "main_func.h"	//	main_func header, main_func.cpp
 
 #endif // !__HE_D_

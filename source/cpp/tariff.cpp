@@ -4,8 +4,9 @@
 
 #include "header\main_header.h"
 
-void TARIFF::calcTariff(Entrylist *user) {
+void TARIFF::calcTariff(Entrylist* elist) {
 	
+	getRFID_amount(elist);
 	if (pay_amount >= 200000)
 	{
 		tariff_amount = (pay_amount * 0.2);
@@ -14,7 +15,6 @@ void TARIFF::calcTariff(Entrylist *user) {
 	{
 		tariff_amount = NULL;
 	}
-	
 }
 
 void TARIFF::getRFID_amount(Entrylist *user) {
@@ -22,7 +22,8 @@ void TARIFF::getRFID_amount(Entrylist *user) {
 	pay_amount = user->passing_price();
 }
 
-void TARIFF::Tariff_print() {
+void TARIFF::Tariff_print(Entrylist* elist) {
 
+	calcTariff(elist);
 	cout << "이 이용자에게 부가될 총 관세는 " << tariff_amount << " 입니다." << endl;
 }

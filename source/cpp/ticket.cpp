@@ -9,7 +9,3 @@ Ticket::Ticket(string userticketseat, int* userentryday, int* userleaveday) :tic
 		leaveday[i] = userleaveday[i];
 	}
 }
-
-//char* Ticket::ticketseat_call(){
-
-//}

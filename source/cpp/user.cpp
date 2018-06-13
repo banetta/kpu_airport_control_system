@@ -7,5 +7,7 @@ User::User(int userpassnum, string username, int userage, string userregion, str
 int User::blacklist() { 
 	return passnum; 
 }
-
-
+void User::showyou()
+{
+	cout << "Passnumber : " << passnum << " Name : " << name << endl;
+}
