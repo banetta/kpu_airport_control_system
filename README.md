@@ -10,18 +10,25 @@ kpu_airport_control_system
 
 팀원
     
-    1. 임현성
+    1. 임현성 (Lim HS)
+        학번 : 2015150031
+           팀장
+           스케쥴 관리 담당
+           C++ 코딩 (User, Leavelist, Entrylist, Blacklist)
 
     2. 김한상 (Han Sang Banetta Kim aka.Banetta)
+        banetion@gmail.com
         학번 : 2013154012
         Java Poting 담당
-        
+        C++ 코딩 (Main, Main_Func, TRiFF, RFID)
 
-    3. 유현승
+    3. 유현승 (Yoo HS)
+        학번 : 2015152024
+        C++ 코딩 (Flight Schedule, Control Tower, Ticket)
     
     4. 류무원
-
-
+        학번:2017154013
+       C++ 코딩(Entry item, Leaveitem item)
 
 2018 Object Oriented Programing Team Project
 
