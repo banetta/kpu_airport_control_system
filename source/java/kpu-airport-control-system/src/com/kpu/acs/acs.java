@@ -251,12 +251,7 @@ class Flightschedule {
 	}
 
 	void showthat() {
-		if (min2 == 0)
-			System.out.printf("%-18s\t %-13s\t %-12d\t %-12d\t %-12d\t %d%s%d%n", airline, destination, seat[0], seat[1], seat[2], hour2, shit2,
-					min2);
-		else
-			System.out.printf("%-18s\t %-13s\t %-12d\t %-12d\t %-12d\t %d%s%d%n", airline, destination, seat[0], seat[1], seat[2], hour2, shit2,
-					min2);
+			System.out.printf("%-18s\t %-13s\t %-12d\t %-12d\t %-12d\t %d%s%d%n", airline, destination, seat[0], seat[1], seat[2], hour2, shit2, min2);
 	}
 
 	void takeoff_check(Controltower ct) {// 비행일정 및 좌석 체크 함수
