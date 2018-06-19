@@ -12,11 +12,13 @@ class RFID
 public:
 	RFID() {};
 	~RFID() {};
-	void tariffpay_check();
+	int RFID_buypick(int *entryday, int *leaveday);	//	구매한 물건을 골라주는 함수
+	void RFID_init(int, int*);
+	
 
 private:
-	char buyday[10];	//	item buy date 물건 구매 일자
-	int price;	//	item price 물건 가격
+	int price;
+	int buyday[3];
 };
 
 #endif // !__RF_D_

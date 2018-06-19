@@ -1,61 +1,104 @@
 // Airport Control System Main Function
 // coding by Banetta Han Sang Kim
 
-// a
-
 #include "header\main_header.h"
-
-// 단일 함수 선언
-void initUser();	//	User를 입력받는 함수
 
 int main() {
 
-	//initUser();	//	User 입력 함수
+	FlightSchedule* fs[100];
+	ControlTower ct;
+	Entrylist* elist[200];
+	Leavelist* llist[200];
+	Entrylist* banlist[30];
+	int i = 0;
 
+	cout << "===	Airport Control System [ACS]	===" << endl;
 	while (true)	//	Menu 구성
 	{
 		// Menu 출력
 		cout << "=== Menu ===" << endl;
+		cout << "i : File Input" << endl;
 		cout << "e : Entry Process" << endl;	//	입국 절차
 		cout << "l : Leave Process" << endl;	//	출국 절차
-		cout << "t : Ticketing" << endl;	// 티켓 발권
+		cout << "t : Today Airplain list" << endl;	// 금일 입출항 목록
+		cout << "a : Airplain Access Management" << endl;	// 항공기 입출항 관리
 		cout << "o : OverEntryUser Check" << endl;	//	불법 체류자 체크
 		cout << "q : Quit Program" << endl;	//	프로그램 종료
+		cout << endl;
+		cout << "[ACS]:# ";
+
 		switch (getchar())	//	menu switch문 : getchar()를 이용, 문자를 받아서 적용
 		{
+		case 'i':	//	이용자 정보 파일 입력 메뉴
+			while (getchar() != '\n');	//	getchar()사용시 버퍼에 입력값이 남아서 이중실행이 될 수 있기 때문에 버퍼를 비우는 작업을 한다.
+			cout << "금일 항공기 입출항 정보를 불러옵니다";
+			createFlightSchedule(fs);
+			Sleep(400); cout << '.';  Sleep(400); cout << '.'; Sleep(400); cout << '.'; Sleep(400); cout << '.' << endl;
+			Sleep(400);
+			cout << "금일 항공기 입출항 정보 불러오기 완료" << endl;
+			Sleep(200);
+			cout << "이용자 정보를 불러옵니다";
+			createUser(elist);	Sleep(400); cout << '.';
+			createUser(llist);	Sleep(400); cout << '.';
+			createban(banlist);	Sleep(400); cout << '.';
+			Sleep(400); cout << '.' << endl;
+			Sleep(200);
+			cout << "이용자 정보 불러오기 완료" << endl;
+			Sleep(200);
+			i++;
+			break;
 		case 'e':	//	입국 절차 메뉴
-			
+			while (getchar() != '\n');	//	버퍼를 비우는 작업.
+			if (i == 0) {
+				cout << "error file input first!!" << endl;
+				break;
+			}
+			leaveprocess(elist);
 			break;
 		case 'l':	//	출국 절차 메뉴
-
+			while (getchar() != '\n');	//	버퍼를 비우는 작업.
+			if (i == 0) {
+				cout << "error file input first!!" << endl;
+				break;
+			}
+			leaveprocess(llist);
 			break;
-		case 't':	//	티켓 발권 메뉴
-
+		case 't':	//	금일 입출항 목록
+			while (getchar() != '\n');	//	버퍼를 비우는 작업.
+			if (i == 0) {
+				cout << "error file input first!!" << endl;
+				break;
+			}
+			Airplainlist(fs);
+			break;
+		case 'a':	//	비행기 입출항 관리 메뉴
+			while (getchar() != '\n');	//	버퍼를 비우는 작업.
+			if (i == 0) {
+				cout << "error file input first!!" << endl;
+				break;
+			}
+			Airlinemanagement(fs, ct);
 			break;
 		case 'o':	//	불법 체류자 체크 메뉴
-
+			while (getchar() != '\n');	//	버퍼를 비우는 작업.
+			if (i == 0) {
+				cout << "error file input first!!" << endl;
+				break;
+			}
+			Illegal_resident(banlist);
 			break;
 		case 'q':	//	프로그램 종료 메뉴
+			while (getchar() != '\n');	//	버퍼를 비우는 작업.
 			cout << endl;
 			cout << endl;
 			cout << "end of program" << endl;
 			return 0;	//	프로그램 종료
 		default:	//	error 경고문 출력 (메뉴 잘못 입력시)
+			while (getchar() != '\n');	//	버퍼를 비우는 작업.
 			cout << endl;
 			cout << "error!! worng char" << endl;
 			cout << endl;
 			break;
 		}
-		while (getchar() != '\n');	//	getchar()사용시 버퍼에 입력값이 남아서 이중실행이 될 수 있기 때문에 버퍼를 비우는 작업을 한다.
 	}
-	
 }
-
-//void initUser() {	//	User 입력 함수 시뮬레이션을 위해 임시로 입력하지만 파일입출력으로 대체 가능
-//	
-//	User* user_list[10];	//	시뮬레이션에 필요한 User 10명 선언
-//	for (int i = 0; i < 9; i++)	//	User 정보 입력
-//	{
-//		user_list[i] = new User("Kim", "23");	//	stack절약을 위해 동적선언
-//	}
-//}
